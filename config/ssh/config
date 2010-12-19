@@ -1,0 +1,90 @@
+# Work - www2
+Host www1
+  HostName www1.newtown.sharkeymedia.com
+  
+Host www2
+  HostName www2.newtown.sharkeymedia.com
+  User sharkeymedia
+
+Host www2.newtown.sharkeymedia.com
+  User sharkeymedia
+  
+Host www3
+  HostName www3.sonic1.sharkeymedia.com
+  
+Host db2
+  HostName db2.sonic1.sharkeymedia.com
+  
+Host couch
+  HostName 192.168.0.176
+  ForwardAgent yes
+  
+Host bislr-status-screen
+  HostName 192.168.0.41
+  User chris
+
+# Personal - New Stuff Server
+Host cepheus
+  HostName cepheus.us.bigtr.net
+  ForwardAgent yes
+
+# Personal - New UK Stuff Server
+Host perseus
+  HostName perseus.uk.bigtr.net
+  ForwardAgent yes
+
+# Personal - New Florida Server
+Host equuleus
+  HostName equuleus.us.bigtr.net
+  ForwardAgent yes
+  
+
+# Personal - New Rackspace Server
+Host lynx
+  HostName lynx.us.patrick.geek.nz
+  ForwardAgent yes
+
+# Personal - New Rackspace Server
+Host redlynx
+  HostName redlynx.us.patrick.geek.nz
+  ForwardAgent yes
+
+# Personal - SVN (actually the new florida server)
+Host svn
+  HostName equuleus.us.bigtr.net
+  ForwardAgent yes
+
+# Personal - Berlios - SVN Server
+Host svn-berlios
+  HostName svn.berlios.de
+  User pftqg
+  IdentityFile ~/.ssh/berlios
+
+# Personal - Berlios - Shell Server
+Host dev-berlios
+  HostName shell.berlios.de
+  User pftqg
+  IdentityFile ~/.ssh/berlios
+
+Host boar
+  HostName boar.prgmr.com
+  User pftqg
+  IdentityFile ~/.ssh/prgmr
+
+Host sophie
+  HostName Sophie.pftqg.members.mac.com.
+  ForwardAgent yes
+
+Host cole
+  HostName cole.au.patrick.geek.nz
+  ForwardAgent yes
+
+Host lizard
+  HostName 10.0.100.14
+  ForwardAgent yes
+
+# By default my username is patrick.
+Host *
+  User patrick
+  IdentityFile ~/.ssh/patrick2008
+
