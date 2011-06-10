@@ -120,3 +120,7 @@ fi
 if [ "`which git`!" != "!" ]; then
   alias tag-genocide='for tag in $(git tag | tr "\n" " "); do git tag -d $tag; done'
 fi
+
+if [ -f ~/.git-completion.sh ]; then
+  . ~/.git-completion.sh
+fi
