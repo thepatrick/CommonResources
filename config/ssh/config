@@ -41,12 +41,12 @@ Host equuleus
 
 # Personal - New Rackspace Server
 Host lynx
-  HostName lynx.us.patrick.geek.nz
+  HostName lynx.us.bigtr.net
   ForwardAgent yes
 
 # Personal - New Rackspace Server
 Host redlynx
-  HostName redlynx.us.patrick.geek.nz
+  HostName redlynx.us.bigtr.net
   ForwardAgent yes
 
 # Personal - SVN (actually the new florida server)
@@ -76,7 +76,11 @@ Host sophie
   ForwardAgent yes
 
 Host cole
-  HostName cole.au.patrick.geek.nz
+  HostName cole.au.bigtr.net
+  ForwardAgent yes
+
+Host digby
+  HostName digby.au.bigtr.net
   ForwardAgent yes
 
 Host lizard
