@@ -5,6 +5,7 @@
 --type-set=nib=.xib
 --type-set=plist=.plist
 --type-set=tmstuff=.tmproj,.tm_build_errors
+--type-set=json=.json
 --nonib
 --notmstuff
 --noxcode
