@@ -116,3 +116,7 @@ fi
 if [ -f ~/.bashrc_local ]; then
     . ~/.bashrc_local
 fi
+
+if [ "`which git`!" != "!" ]; then
+  alias tag-genocide='for tag in $(git tag | tr "\n" " "); do git tag -d $tag; done'
+fi

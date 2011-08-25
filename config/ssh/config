@@ -65,7 +65,7 @@ Host boar
   HostName boar.prgmr.com
   User pftqg
   IdentityFile ~/.ssh/prgmr
-  
+
 Host digby
   HostName digby.au.bigtr.net
   ForwardAgent yes
