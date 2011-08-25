@@ -65,13 +65,9 @@ Host boar
   HostName boar.prgmr.com
   User pftqg
   IdentityFile ~/.ssh/prgmr
-
-Host sophie
-  HostName Sophie.pftqg.members.mac.com.
-  ForwardAgent yes
-
-Host cole
-  HostName cole.au.bigtr.net
+  
+Host digby
+  HostName digby.au.bigtr.net
   ForwardAgent yes
 
 Host lizard
