@@ -41,17 +41,12 @@ Host equuleus
 
 # Personal - New Rackspace Server
 Host lynx
-  HostName lynx.us.patrick.geek.nz
+  HostName lynx.us.bigtr.net
   ForwardAgent yes
 
 # Personal - New Rackspace Server
 Host redlynx
-  HostName redlynx.us.patrick.geek.nz
-  ForwardAgent yes
-
-# Personal - SVN (actually the new florida server)
-Host svn
-  HostName equuleus.us.bigtr.net
+  HostName redlynx.us.bigtr.net
   ForwardAgent yes
 
 # Personal - Berlios - SVN Server
@@ -71,12 +66,8 @@ Host boar
   User pftqg
   IdentityFile ~/.ssh/prgmr
 
-Host sophie
-  HostName Sophie.pftqg.members.mac.com.
-  ForwardAgent yes
-
-Host cole
-  HostName cole.au.patrick.geek.nz
+Host digby
+  HostName digby.au.bigtr.net
   ForwardAgent yes
 
 Host lizard
