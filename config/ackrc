@@ -6,6 +6,7 @@
 --type-set=plist=.plist
 --type-set=tmstuff=.tmproj,.tm_build_errors
 --type-set=json=.json
+--type-set=coffee=.coffee
 --nonib
 --notmstuff
 --noxcode
