@@ -23,6 +23,16 @@ Host bislr-status-screen
   HostName 192.168.0.41
   User chris
 
+Host manager
+  HostName manager.bozler.net
+  User manager
+
+Host statcenter
+  HostName statcenter.bislr.net
+
+Host vault-sandbox
+  HostName gateway.sandbox.vault.bislr.net
+    
 # Personal - New Stuff Server
 Host cepheus
   HostName cepheus.us.bigtr.net
@@ -32,12 +42,6 @@ Host cepheus
 Host perseus
   HostName perseus.uk.bigtr.net
   ForwardAgent yes
-
-# Personal - New Florida Server
-Host equuleus
-  HostName equuleus.us.bigtr.net
-  ForwardAgent yes
-  
 
 # Personal - New Rackspace Server
 Host lynx
@@ -78,4 +82,6 @@ Host lizard
 Host *
   User patrick
   IdentityFile ~/.ssh/patrick2008
-
+  ServerAliveCountMax 3
+  ServerAliveInterval 60
+  KeepAlive yes
