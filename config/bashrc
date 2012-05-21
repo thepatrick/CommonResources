@@ -11,6 +11,9 @@
 
 DEFAULT_COLOR="33"
 
+if [ "$OSTYPE" == "darwin11" ]; then
+	DEFAULT_COLOR="29"
+fi
 if [ "$OSTYPE" == "darwin10.0" ]; then
 	DEFAULT_COLOR="29"
 fi
