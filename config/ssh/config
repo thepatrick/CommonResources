@@ -1,3 +1,6 @@
+ControlMaster auto
+ControlPath   /Users/patrick/.ssh/tmp/%h_%p_%r
+
 # Work - www2
 Host www1
   HostName www1.newtown.sharkeymedia.com
@@ -32,6 +35,9 @@ Host statcenter
 
 Host vault-sandbox
   HostName gateway.sandbox.vault.bislr.net
+
+Host vault-prod
+  ProxyCommand ssh -q manager nc -q0 gateway.prod.vault.prv.bislr.net 22
     
 # Personal - New Stuff Server
 Host cepheus
@@ -77,6 +83,11 @@ Host digby
 Host lizard
   HostName 10.0.100.14
   ForwardAgent yes
+
+Host koala
+  HostName koala.bislr.net
+  ForwardAgent yes
+  User koala
 
 # By default my username is patrick.
 Host *
