@@ -11,6 +11,12 @@
 
 DEFAULT_COLOR="33"
 
+if [ "$OSTYPE" == "darwin13" ]; then
+	DEFAULT_COLOR="29"
+fi
+if [ "$OSTYPE" == "darwin12" ]; then
+	DEFAULT_COLOR="29"
+fi
 if [ "$OSTYPE" == "darwin11" ]; then
 	DEFAULT_COLOR="29"
 fi
@@ -28,6 +34,9 @@ if [ -f /etc/debian_version ]; then
 fi
 
 case "$TERM" in
+xterm-256color)
+    PS1='[\[\033[${DEFAULT_COLOR};${DEFAULT_COLOR}m\]${USER}@\h\[\033[00m\]] \[\033[32;32m\]${PWD}\[\033[00m\]\$ '
+    ;;
 xterm-color)
     PS1='\[\033[${DEFAULT_COLOR};${DEFAULT_COLOR}m\]${USER}@\h\[\033[00m\]:\[\033[32;32m\]${PWD}\[\033[00m\]\$ '
     ;;
