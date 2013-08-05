@@ -89,6 +89,14 @@ Host koala
   ForwardAgent yes
   User koala
 
+Host aircnc2
+  HostName 184.73.230.82
+  User tokbox
+
+Host aircnc2.tokbox.com
+  HostName 184.73.230.82
+  User tokbox
+
 # By default my username is patrick.
 Host *
   User patrick
