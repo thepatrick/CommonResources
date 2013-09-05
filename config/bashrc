@@ -140,5 +140,9 @@ if [ -f ~/.git-completion.sh ]; then
   . ~/.git-completion.sh
 fi
 
+function http(){
+    curl http://httpcode.info/$1;
+}
+
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
