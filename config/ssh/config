@@ -66,12 +66,8 @@ Host tpg
   IdentityFile ~/.ssh/tpg
   User root
 
-Host aircnc2
-  HostName 184.73.230.82
-  User tokbox
-
-Host aircnc2.tokbox.com
-  HostName 184.73.230.82
+Host gum
+  HostName gum.tokbox.com
   User tokbox
 
 # By default my username is patrick.
