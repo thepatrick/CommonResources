@@ -1,32 +1,6 @@
 ControlMaster auto
 ControlPath   /Users/patrick/.ssh/tmp/%h_%p_%r
 
-Host couch
-  HostName 192.168.0.176
-  ForwardAgent yes
-
-Host manager
-  HostName manager.bislr.net
-  User manager
-
-Host statcenter
-  HostName statcenter.bislr.net
-
-Host vault-sandbox
-  HostName gateway.sandbox.vault.bislr.net
-
-Host vault-prod
-  ProxyCommand ssh -q manager nc -q0 gateway.prod.vault.prv.bislr.net 22
-
-Host wombat1
-  HostName wombat1.bislr.net
-  User wombat
-
-Host koala
-  HostName koala.bislr.net
-  ForwardAgent yes
-  User koala
-
 # Personal - New Stuff Server
 Host cepheus
   HostName cepheus.us.bigtr.net
@@ -47,32 +21,20 @@ Host squash
   HostName squash.us.bigtr.net
   ForwardAgent yes
 
-Host boar
-  HostName boar.prgmr.com
-  User pftqg
-  IdentityFile ~/.ssh/prgmr
-
 Host digby
   HostName digby.au.bigtr.net
+  IdentityFile ~/.ssh/patrick2013
   ForwardAgent yes
 
-Host lizard
-  HostName 10.0.100.14
+Host home
+  HostName home.au.bigtr.net
+  IdentityFile ~/.ssh/patrick2013
   ForwardAgent yes
 
-Host tpg
-  HostName 108.166.123.158
-  ForwardAgent no
-  IdentityFile ~/.ssh/tpg
-  User root
-
-Host aircnc2
-  HostName 184.73.230.82
-  User tokbox
-
-Host aircnc2.tokbox.com
-  HostName 184.73.230.82
-  User tokbox
+Host border
+  HostName border.au.bigtr.net
+  IdentityFile ~/.ssh/patrick2013
+  ForwardAgent yes
 
 # By default my username is patrick.
 Host *
