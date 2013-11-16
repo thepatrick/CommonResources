@@ -22,7 +22,7 @@ Host squash
   ForwardAgent yes
 
 Host digby
-  HostName digby.au.bigtr.net
+  HostName digby.us.bigtr.net
   IdentityFile ~/.ssh/patrick2013
   ForwardAgent yes
 
