@@ -36,6 +36,12 @@ Host border
   IdentityFile ~/.ssh/patrick2013
   ForwardAgent yes
 
+Host irc-etc
+  HostName irc-etc.digby.us.bigtr.net
+  IdentityFile ~/.ssh/patrick2013
+  ForwardAgent yes
+
+
 # By default my username is patrick.
 Host *
   User patrick
