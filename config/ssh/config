@@ -11,41 +11,39 @@ Host perseus
   HostName perseus.uk.bigtr.net
   ForwardAgent yes
 
-# Personal - New Rackspace Server
-Host lynx
-  HostName lynx.us.bigtr.net
-  ForwardAgent yes
-
 # Personal - Squash (3GB server)
 Host squash
   HostName squash.us.bigtr.net
   ForwardAgent yes
 
+Host fritz
+  HostName fritz.au.bigtr.net
+  ForwardAgent yes
+
 Host digby
   HostName digby.us.bigtr.net
-  IdentityFile ~/.ssh/patrick2013
   ForwardAgent yes
 
 Host home
   HostName home.au.bigtr.net
-  IdentityFile ~/.ssh/patrick2013
   ForwardAgent yes
 
 Host border
   HostName border.au.bigtr.net
-  IdentityFile ~/.ssh/patrick2013
   ForwardAgent yes
 
 Host irc-etc
   HostName irc-etc.digby.us.bigtr.net
-  IdentityFile ~/.ssh/patrick2013
   ForwardAgent yes
 
+Host bouncer
+  HostName bouncer.digby.us.bigtr.net
+  ForwardAgent yes
 
 # By default my username is patrick.
 Host *
   User patrick
-  IdentityFile ~/.ssh/patrick2008
+  IdentityFile ~/.ssh/current-default
   ServerAliveCountMax 3
   ServerAliveInterval 60
   KeepAlive yes
