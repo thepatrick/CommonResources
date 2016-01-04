@@ -11,19 +11,7 @@
 
 DEFAULT_COLOR="33"
 
-if [ "$OSTYPE" == "darwin13" ]; then
-	DEFAULT_COLOR="29"
-fi
-if [ "$OSTYPE" == "darwin12" ]; then
-	DEFAULT_COLOR="29"
-fi
-if [ "$OSTYPE" == "darwin11" ]; then
-	DEFAULT_COLOR="29"
-fi
-if [ "$OSTYPE" == "darwin10.0" ]; then
-	DEFAULT_COLOR="29"
-fi
-if [ "$OSTYPE" == "darwin9.0" ]; then
+if [ "$OSTYPE" == "darwin"* ]; then
 	DEFAULT_COLOR="29"
 fi
 if [ -f /etc/redhat-release ]; then
@@ -104,15 +92,8 @@ export HISTCONTROL=ignoredups
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-if [ "$OSTYPE" == "darwin10.0" ]; then
-	alias getinfo='/Developer/Tools/GetFileInfo'
-	alias lsreg='/System/Library/Frameworks/ApplicationServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user /'
-	alias screenback='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background &'
-	alias top='top -u'
-fi
-if [ "$OSTYPE" == "darwin9.0" ]; then
-	alias getinfo='/Developer/Tools/GetFileInfo'
-	alias lsreg='/System/Library/Frameworks/ApplicationServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user /'
+if [ "$OSTYPE" == "darwin"* ]; then
+	alias getinfo='xcrun GetFileInfo'
 	alias screenback='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background &'
 	alias top='top -u'
 fi
