@@ -40,6 +40,14 @@ Host bouncer
   HostName bouncer.digby.us.bigtr.net
   ForwardAgent yes
 
+Host roger
+  HostName roger.au.bigtr.net
+  ForwardAgent yes
+
+Host jamie
+  HostName jamie.au.bigtr.net
+  ForwardAgent yes
+
 # By default my username is patrick.
 Host *
   User patrick
