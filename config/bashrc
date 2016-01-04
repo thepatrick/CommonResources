@@ -43,6 +43,9 @@ xterm-color)
 xterm-256color)
     PS1='\[\033[${DEFAULT_COLOR};${DEFAULT_COLOR}m\]${USER}@\h\[\033[00m\]:\[\033[32;32m\]${PWD}\[\033[00m\]\$ '
     ;;
+screen-256color)                                                                 
+    PS1='\[\033[${DEFAULT_COLOR};${DEFAULT_COLOR}m\]${USER}@\h\[\033[00m\]:\[\033[32;32m\]${PWD}\[\033[00m\]\$ '                                                
+    ;; 
 xterm*|rxvt*)
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
     ;;
@@ -159,3 +162,4 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # added by travis gem
 [ -f /Users/patrick/.travis/travis.sh ] && source /Users/patrick/.travis/travis.sh
+
