@@ -40,6 +40,9 @@ Host bouncer
   HostName bouncer.digby.us.bigtr.net
   ForwardAgent yes
 
+Host quokka*
+  User quokka
+
 # By default my username is patrick.
 Host *
   User patrick
