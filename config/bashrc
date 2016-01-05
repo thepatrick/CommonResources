@@ -28,7 +28,7 @@ xterm-256color)
 xterm-color)
     PS1='\[\033[${DEFAULT_COLOR};${DEFAULT_COLOR}m\]${USER}@\h\[\033[00m\]:\[\033[32;32m\]${PWD}\[\033[00m\]\$ '
     ;;
-xterm-256color)
+screen-256color)
     PS1='\[\033[${DEFAULT_COLOR};${DEFAULT_COLOR}m\]${USER}@\h\[\033[00m\]:\[\033[32;32m\]${PWD}\[\033[00m\]\$ '
     ;;
 xterm*|rxvt*)
@@ -43,7 +43,7 @@ esac
 function memh() {
   top -n 5 -o rprvt -l1 | tail -n 5 | awk '{ printf "%5d\t%-10s\t%4.1fMB\n", $1, $2, $(NF-3) }';
 }
- 
+
 #Back Up and date
 function bkdate() {
   cp $1 $1.`date +%Y%m%d`;
@@ -125,7 +125,20 @@ function http(){
     curl http://httpcode.info/$1;
 }
 
+code () {
+    if [[ $# = 0 ]]
+    then
+        open -a "Visual Studio Code"
+    else
+        [[ $1 = /* ]] && F="$1" || F="$PWD/${1#./}"
+        open -a "Visual Studio Code" --args "$F"
+    fi
+}
+
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# added by travis gem
+[ -f /Users/patrick/.travis/travis.sh ] && source /Users/patrick/.travis/travis.sh
