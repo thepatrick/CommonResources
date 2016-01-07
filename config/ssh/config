@@ -40,6 +40,10 @@ Host bouncer
   HostName bouncer.digby.us.bigtr.net
   ForwardAgent yes
 
+Host sf
+  User jenkins
+  HostName pqg.corp.tokbox.com
+
 # By default my username is patrick.
 Host *
   User patrick
