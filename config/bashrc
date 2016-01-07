@@ -11,19 +11,7 @@
 
 DEFAULT_COLOR="33"
 
-if [ "$OSTYPE" == "darwin13" ]; then
-	DEFAULT_COLOR="29"
-fi
-if [ "$OSTYPE" == "darwin12" ]; then
-	DEFAULT_COLOR="29"
-fi
-if [ "$OSTYPE" == "darwin11" ]; then
-	DEFAULT_COLOR="29"
-fi
-if [ "$OSTYPE" == "darwin10.0" ]; then
-	DEFAULT_COLOR="29"
-fi
-if [ "$OSTYPE" == "darwin9.0" ]; then
+if [ "$OSTYPE" == "darwin"* ]; then
 	DEFAULT_COLOR="29"
 fi
 if [ -f /etc/redhat-release ]; then
@@ -34,14 +22,8 @@ if [ -f /etc/debian_version ]; then
 fi
 
 case "$TERM" in
-xterm-256color)
+xterm-256color|xterm-color|screen-256color)
     PS1='[\[\033[${DEFAULT_COLOR};${DEFAULT_COLOR}m\]${USER}@\h\[\033[00m\]] \[\033[32;32m\]${PWD}\[\033[00m\]\$ '
-    ;;
-xterm-color)
-    PS1='\[\033[${DEFAULT_COLOR};${DEFAULT_COLOR}m\]${USER}@\h\[\033[00m\]:\[\033[32;32m\]${PWD}\[\033[00m\]\$ '
-    ;;
-xterm-256color)
-    PS1='\[\033[${DEFAULT_COLOR};${DEFAULT_COLOR}m\]${USER}@\h\[\033[00m\]:\[\033[32;32m\]${PWD}\[\033[00m\]\$ '
     ;;
 xterm*|rxvt*)
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
@@ -55,7 +37,7 @@ esac
 function memh() {
   top -n 5 -o rprvt -l1 | tail -n 5 | awk '{ printf "%5d\t%-10s\t%4.1fMB\n", $1, $2, $(NF-3) }';
 }
- 
+
 #Back Up and date
 function bkdate() {
   cp $1 $1.`date +%Y%m%d`;
@@ -76,6 +58,9 @@ add_to_path /usr/local/lib/erlang/lib/rabbitmq_server-1.4.0/sbin
 add_to_path ~/dev/from-svn/depot_tools
 add_to_path ~/bin
 add_to_path ~/etc
+add_to_path /usr/local/heroku/bin # Added by the Heroku Toolbelt
+add_to_path $HOME/.rvm/bin        # Add RVM to PATH for scripting
+
 export PATH
 
 if [ -d ~/usr/local/man:/Library/PostgreSQL8/man ] ; then
@@ -104,15 +89,8 @@ export HISTCONTROL=ignoredups
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-if [ "$OSTYPE" == "darwin10.0" ]; then
-	alias getinfo='/Developer/Tools/GetFileInfo'
-	alias lsreg='/System/Library/Frameworks/ApplicationServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user /'
-	alias screenback='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background &'
-	alias top='top -u'
-fi
-if [ "$OSTYPE" == "darwin9.0" ]; then
-	alias getinfo='/Developer/Tools/GetFileInfo'
-	alias lsreg='/System/Library/Frameworks/ApplicationServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user /'
+if [ "$OSTYPE" == "darwin"* ]; then
+	alias getinfo='xcrun GetFileInfo'
 	alias screenback='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background &'
 	alias top='top -u'
 fi
@@ -144,5 +122,15 @@ function http(){
     curl http://httpcode.info/$1;
 }
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+code () {
+    if [[ $# = 0 ]]
+    then
+        open -a "Visual Studio Code"
+    else
+        [[ $1 = /* ]] && F="$1" || F="$PWD/${1#./}"
+        open -a "Visual Studio Code" --args "$F"
+    fi
+}
+
+# added by travis gem
+[ -f /Users/patrick/.travis/travis.sh ] && source /Users/patrick/.travis/travis.sh
