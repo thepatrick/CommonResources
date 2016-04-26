@@ -13,3 +13,6 @@
 [submodule "vim/bundle/swift.vim"]
 	path = vim/bundle/swift.vim
 	url = https://github.com/Keithbsmiley/swift.vim.git
+[submodule "fisherman/bass"]
+	path = fisherman/bass
+	url = https://github.com/edc/bass
