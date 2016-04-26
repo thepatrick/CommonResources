@@ -51,6 +51,10 @@ Host jamie
 Host quokka*
   User quokka
 
+Host quokka-master
+  User quokka
+  HostName quokka-master.corp.tokbox.com
+
 # By default my username is patrick.
 Host *
   User patrick
