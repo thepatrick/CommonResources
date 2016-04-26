@@ -32,16 +32,11 @@ xterm*|rxvt*)
     ;;
 esac
 
-# Courtesy of http://github.com/Chealion/chealion
-#Top 5 memory hogs
-function memh() {
-  top -n 5 -o rprvt -l1 | tail -n 5 | awk '{ printf "%5d\t%-10s\t%4.1fMB\n", $1, $2, $(NF-3) }';
-}
-
 #Back Up and date
 function bkdate() {
   cp $1 $1.`date +%Y%m%d`;
 }
+
 # Add a directory to PATH if it exists
 function add_to_path() {
 	if [ -d $1 ]; then
