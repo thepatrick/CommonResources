@@ -70,10 +70,6 @@ if [ -f /usr/bin/pico ]; then
 	export EDITOR="pico"
 fi
 
-if [ -f /usr/local/bin/mate ]; then
-    export EDITOR="mate -aw"
-fi
-
 alias lsl='ls -lFh'
 alias lsa='ls -laFh'
 
