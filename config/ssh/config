@@ -48,6 +48,10 @@ Host jamie
   HostName jamie.au.bigtr.net
   ForwardAgent yes
 
+Host sf
+  User jenkins
+  HostName pqg.corp.tokbox.com
+
 Host quokka*
   User quokka
 

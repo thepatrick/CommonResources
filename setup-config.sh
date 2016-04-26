@@ -20,6 +20,7 @@ setup_link `pwd`/config/bash_login ~/.bash_login
 setup_link `pwd`/config/bashrc ~/.bashrc
 setup_link `pwd`/config/git-completion.sh ~/.git-completion.sh
 setup_link `pwd`/config/inputrc ~/.inputrc
+setup_link `pwd`/config/tmux.conf ~/.tmux.conf
 setup_link `pwd`/config/ssh/config ~/.ssh/config
 setup_link `pwd`/config/vimrc ~/.vimrc
 setup_link `pwd`/vim ~/.vim
