@@ -24,5 +24,8 @@ setup_link `pwd`/config/ssh/config ~/.ssh/config
 setup_link `pwd`/config/vimrc ~/.vimrc
 setup_link `pwd`/vim ~/.vim
 
+setup_link `pwd`/fish ~/.config/fish
+setup_link `pwd`/fisherman ~/.config/fisherman
+
 git submodule init
 git submodule update
