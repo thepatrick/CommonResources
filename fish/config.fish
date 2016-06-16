@@ -1,5 +1,3 @@
-set fisher_config ~/.config/fisherman
-
 # Snippet setting git branch and git dirty helper
 # Commit at the end kept from original snippet, I added the rev-parse stuff and the proper redirection.
 
@@ -92,7 +90,7 @@ if test -e ~/usr/local/man:/Library/PostgreSQL8/man
 end
 
 if test -e /usr/bin/nano
-  set -X EDITOR nano
+  set -x EDITOR nano
 end
 
 function lsl
