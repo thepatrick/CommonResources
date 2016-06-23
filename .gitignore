@@ -4,3 +4,4 @@
 fish/config_local.fish
 fish/fish_history
 fish/fish_read_history
+fish/fishd.*

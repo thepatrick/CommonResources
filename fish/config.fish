@@ -85,11 +85,7 @@ add_to_path ~/etc
 add_to_path /usr/local/heroku/bin # Added by the Heroku Toolbelt
 add_to_path $HOME/.rvm/bin        # Add RVM to PATH for scripting
 
-if test -e ~/usr/local/man:/Library/PostgreSQL8/man
-  set -x MANPATH /usr/local/man:/Library/PostgreSQL8/man $MANPATH
-end
-
-if test -e /usr/bin/nano
+if test -e "/usr/bin/nano"
   set -x EDITOR nano
 end
 
@@ -101,7 +97,7 @@ function lsa
   ls -laFh $argv
 end
 
-if [ test -e /usr/bin/xcrun ]
+if test -e "/usr/bin/xcrun"
   function getinfo
     xcrun GetFileInfo $argv
   end
