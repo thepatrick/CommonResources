@@ -121,6 +121,8 @@ if test -e ~/.config/fish/config_local.fish
   source ~/.config/fish/config_local.fish
 end
 
+set -x HOMEBREW_NO_ANALYTICS 1
+
 # code () {
 #     if [[ $# = 0 ]]
 #     then
