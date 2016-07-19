@@ -59,6 +59,10 @@ Host quokka-master
   User quokka
   HostName quokka-master.corp.tokbox.com
 
+Host devaws
+  User pqg
+  HostName 52.62.32.181
+
 # By default my username is patrick.
 Host *
   User patrick
