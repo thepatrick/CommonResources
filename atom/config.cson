@@ -32,7 +32,7 @@
   "file-icons":
     coloured: false
   linter:
-    errorPanelHeight: 45
+    errorPanelHeight: 46
     statusBar: "Show all errors"
     subtleLinterErrors: [
       "jscs"
@@ -40,6 +40,7 @@
   "linter-eslint":
     disableWhenNoEslintrcFileInPath: true
     eslintPath: "/usr/local/bin/eslint"
+    fixOnSave: true
     globalNodePath: "/usr/local"
     showRuleIdInMessage: true
   "linter-jscs":
