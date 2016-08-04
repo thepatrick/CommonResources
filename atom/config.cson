@@ -1,0 +1,75 @@
+"*":
+  "atom-material-ui":
+    depth: true
+    disableAnimations: true
+    panelContrast: true
+    tabSize: "Small"
+  core:
+    disabledPackages: [
+      "atom-jshinter"
+      "linter-jsxhint"
+      "atom-jshint"
+      "linter-jshint"
+    ]
+    ignoredNames: [
+      ".git"
+      ".svn"
+      ".DS_Store"
+    ]
+    themes: [
+      "native-ui"
+      "one-light-syntax"
+    ]
+  editor:
+    fontFamily: "Menlo"
+    fontSize: 17
+    invisibles: {}
+    preferredLineLength: 100
+    showIndentGuide: true
+    showInvisibles: true
+  "exception-reporting":
+    userId: "a798c3f9-7919-14a8-f181-111c447986b3"
+  "file-icons":
+    coloured: false
+  linter:
+    errorPanelHeight: 46
+    statusBar: "Show all errors"
+    subtleLinterErrors: [
+      "jscs"
+    ]
+  "linter-eslint":
+    disableWhenNoEslintrcFileInPath: true
+    eslintPath: "/usr/local/bin/eslint"
+    fixOnSave: true
+    globalNodePath: "/usr/local"
+    showRuleIdInMessage: true
+  "linter-jscs":
+    harmony: true
+    onlyConfig: true
+    verbose: true
+  "linter-jshint": {}
+  "linter-jsxhint":
+    harmony: true
+  "markdown-preview-opener": {}
+  metrics:
+    userId: "32719a13cccb231ff8096fb803e0e9740280d58f"
+  react: {}
+  "release-notes":
+    viewedVersion: "0.81.0"
+  "sync-settings":
+    _analyticsUserId: "e77d087a-8e05-4cbb-846e-9a2f067da6c3"
+    _lastBackupHash: "a11ca243c6400cedc3eaf8a3385d7dd79e99336b"
+    gistId: "75347bf79ee7c645f019"
+    personalAccessToken: "2a5eaa61f7c8f030dee12b7dd4d41effa96516f6"
+  "terminal-plus":
+    style:
+      fontFamily: "Menlo"
+  "tree-view": {}
+  welcome:
+    showOnStartup: false
+".basic.ect.html.text":
+  editor:
+    preferredLineLength: 100
+".json.source":
+  editor:
+    preferredLineLength: 100

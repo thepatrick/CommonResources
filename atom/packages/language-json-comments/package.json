@@ -1,0 +1,38 @@
+{
+  "name": "language-json-comments",
+  "version": "0.16.3",
+  "description": "JSON language with comments support in Atom",
+  "engines": {
+    "atom": "*",
+    "node": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clintwood/language-json-comments.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/clintwood/language-json-comments/issues"
+  },
+  "devDependencies": {
+    "coffeelint": "^1.10.1"
+  },
+  "readme": "# JSON language with comments support in Atom\n\nAdds syntax highlighting of JSON files in Atom with additional support for\n**comments** within json.\n\n**NOTE:** Comments in JSON is not part of the JSON spec.\nSee [json.org](http://www.json.org/) for more information.\n\nForked from [language-json](https://github.com/atom/language-json) and\nOriginally [converted](http://atom.io/docs/latest/converting-a-text-mate-bundle)\nfrom the [JSON TextMate bundle](https://github.com/textmate/json.tmbundle).\n\n## License\nSee [LICENSE.md](https://github.com/clintwood/language-json/blob/master/LICENSE.md)\n",
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/clintwood/language-json-comments#readme",
+  "_id": "language-json-comments@0.16.3",
+  "_shasum": "093f0391bd97702bd8a5c7e467aba983ea3589ae",
+  "_resolved": "file:../d-116020-7836-1d95mwe/package.tgz",
+  "_from": "../d-116020-7836-1d95mwe/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "coffeelint.json",
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}
