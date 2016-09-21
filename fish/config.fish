@@ -117,6 +117,11 @@ end
 
 set -x HOMEBREW_NO_ANALYTICS 1
 
+#func docker-cleanup
+#  docker rm (docker ps -qa --no-trunc --filter "status=exited")
+#  docker rmi (docker images --filter "dangling=true" -q --no-trunc)
+#end
+
 # code () {
 #     if [[ $# = 0 ]]
 #     then
