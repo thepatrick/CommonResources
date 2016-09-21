@@ -67,9 +67,12 @@
 #   cp $1 $1.`date +%Y%m%d`;
 # }
 
+
 function add_to_path
   if test -e $argv[1]
-    set -x PATH $argv[1] $PATH
+    if not contains $argv[1] $PATH
+      set -x PATH $argv[1] $PATH 
+    end
   end
 end
 
