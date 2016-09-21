@@ -63,6 +63,10 @@ Host devaws
   User pqg
   HostName 52.62.32.181
 
+Host mantis002-dev
+  User pqg
+  HostName mantis002-dev.tokbox.com
+
 # By default my username is patrick.
 Host *
   User patrick
