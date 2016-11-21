@@ -16,12 +16,14 @@
       ".svn"
       ".DS_Store"
     ]
+    telemetryConsent: "limited"
     themes: [
       "native-ui"
       "one-light-syntax"
     ]
   editor:
     fontFamily: "Menlo"
+    fontSize: 15
     invisibles: {}
     preferredLineLength: 100
     showIndentGuide: true
@@ -31,7 +33,7 @@
   "file-icons":
     coloured: false
   linter:
-    errorPanelHeight: 46
+    errorPanelHeight: 48
     statusBar: "Show all errors"
     subtleLinterErrors: [
       "jscs"
