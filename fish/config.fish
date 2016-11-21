@@ -114,11 +114,33 @@ function http
   curl http://httpcode.info/$argv[1]
 end
 
+set -x HOMEBREW_NO_ANALYTICS 1
+
+if test -e ~/.nvm
+  set -x NVM_DIR ~/.nvm
+  if test -e ~/.nvm/nvm.sh
+    set NVM_SH ~/.nvm/nvm.sh
+  else
+    set BREW_SH (which brew)
+    if test -e $BREW_SH
+      set NVM_SH (brew --prefix nvm)/nvm.sh
+    end
+  end
+  if test -e $NVM_SH
+    bass source $NVM_SH
+    function nvm
+       bass source $NVM_SH --no-use ';' nvm $argv
+    end
+  else
+    echo "Could not find nvm.sh (best guess $NVM_SH), disabling nvm helpers"
+  end
+else
+  echo No ~/.nvm, disabling nvm helpers
+end
+
 if test -e ~/.config/fish/config_local.fish
   source ~/.config/fish/config_local.fish
 end
-
-set -x HOMEBREW_NO_ANALYTICS 1
 
 #func docker-cleanup
 #  docker rm (docker ps -qa --no-trunc --filter "status=exited")
