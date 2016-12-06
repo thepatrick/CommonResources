@@ -63,10 +63,6 @@ Host devaws
   User pqg
   HostName 52.62.32.181
 
-Host devawsus
-  User pqg
-  HostName 52.41.63.250
-
 Host mantis002-dev
   User pqg
   HostName mantis002-dev.tokbox.com
@@ -80,6 +76,13 @@ Host dropbear001-dev
   UserKnownHostsFile ~/.ssh/known_hosts
   
 Host 10.0.10.*
+  User ec2-user
+  ProxyCommand ssh mantis002-dev nc -w 120 %h %p
+  IdentityFile ~/.ssh/pqg-dropbear-tests.pem
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+
+Host 10.0.2.*
   User ec2-user
   ProxyCommand ssh mantis002-dev nc -w 120 %h %p
   IdentityFile ~/.ssh/pqg-dropbear-tests.pem
