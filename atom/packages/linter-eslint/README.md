@@ -35,7 +35,7 @@ You have two options:
 
     *   `$ npm i --save-dev eslint [eslint-plugins]`
 
-*   Install globaly `eslint` and plugins
+*   Install globally `eslint` and plugins
 
     *   `$ npm i -g eslint [eslint-plugins]`
     *   Activate `Use Global Eslint` package option
@@ -56,3 +56,17 @@ Alternatively you can create the `.eslintrc` file by yourself. It is a good
 idea to have a look at the [Get Started With ESLint](http://devnull.guru/get-started-with-eslint/)
 blog post by [IanVS](https://github.com/IanVS) and [the ESLint documentation](http://eslint.org/docs/user-guide/configuring),
 including the [list of rules](http://eslint.org/docs/rules/).
+
+## A Note About Settings
+
+If Use Global is on, Atom will use the global ESLint. The path to it is figured out by running `npm get prefix`. If this fails for any reason, you can set the global path manually in Global Node Installation Path.
+
+If Use Global is off, Atom will try to find a local installation in the project folder, look if there's ESLint in `${PROJECT_ROOT}/node_modules` and use it if found.
+
+The path to the local node_modules folder can be a path relative to the project or an absolute path and should end in /node_modules/. This path is used if the other methods of discovery have failed.
+
+If there is no local installation Atom will use the built-in ESLint in the linter-eslint package itself.
+
+## Contributing
+
+See the [contributing guidelines](./CONTRIBUTING.md) to get started

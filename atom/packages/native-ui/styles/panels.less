@@ -31,12 +31,11 @@ atom-panel,
   border-bottom: none;
   padding: @component-padding - 2px @component-padding;
   background-color: transparent;
-  background-image: -webkit-linear-gradient(@panel-heading-background-color, darken(@panel-heading-background-color, 10%));
+  background-image: linear-gradient(@panel-heading-background-color, darken(@panel-heading-background-color, 10%));
 }
 
-.find-and-replace,
-.project-find {
-  box-shadow: 0 -1px @tab-bar-border-color;
+.panel-bottom {
+  box-shadow: 0 -1px 0 0 @tab-bar-border-color-transparent;
 }
 
 // Make the panel more like the Spotlight search
@@ -45,8 +44,8 @@ atom-panel,
 .symbols-view,
 .grammar-selector,
 .encoding-selector {
-  atom-text-editor[mini],
-  atom-text-editor[mini] {
+  .editor.mini,
+  .editor.mini {
     color: @text-color;
     font-family: @font-family;
     font-size: 1.75em;
@@ -72,7 +71,7 @@ atom-panel,
 }
 
 // Increase padding from label to the input
-.tree-view-dialog label + atom-text-editor[mini] {
+.tree-view-dialog label + .editor.mini {
   margin-top: @component-padding;
   margin-bottom: 0;
 }

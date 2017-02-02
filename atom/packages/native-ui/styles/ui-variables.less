@@ -80,7 +80,7 @@
 @tab-bar-border-color-transparent:    rgba(0, 0, 0, 0.3);
 @tab-background-color:                darken(#fff, 30%);
 @tab-bar-background-color:            @tab-background-color;
-@tab-background-color-active:         darken(#fff, 17%);
+@tab-background-color-active:         #d3d3d3;
 @tab-bar-background-color--blurred:   @tab-background-color-active;
 @tab-background-color-hover:          darken(#fff, 35%);
 @tab-border-color:                    @tab-bar-border-color;
@@ -94,9 +94,10 @@
 @tip-arrow-color:                     hsl(@ui-hue, 10%, 30%);
 
 @status-bar-background-color:         @tab-background-color-active;
+@status-bar-border-color:             @tab-bar-border-color-transparent;
 
 @tree-view-background-color:          #eee;
-@tree-view-border-color:              @base-border-color;
+@tree-view-border-color:              @tab-bar-border-color-transparent;
 
 @ui-site-color-1: @background-color-success; // green
 @ui-site-color-2: @background-color-info; // blue
@@ -125,11 +126,13 @@
 
 // Other
 
-@font-family: '.SFNSText-Regular', 'San Francisco Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
-@font-family-headlines: '.SFNSDisplay-Regular', 'San Francisco Display', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
+@font-family: '.SFNSText', 'Lucida Grande', 'Segoe UI', sans-serif;
+@font-family-headlines: '.SFNSDisplay', 'Lucida Grande', 'Segoe UI', sans-serif;
 
 ///////////////////////////////////////////////
 
 @border-radius--base: 4px;
+@border-radius--large: 8px;
 @transition--default: 0.15s ease-out;
 @opacity-blurred: 0.5;
+@background-git-view: hsl(@ui-hue, @ui-s-s, 25%);

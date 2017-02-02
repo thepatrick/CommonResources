@@ -4,8 +4,8 @@ OutputViewManager = require '../output-view-manager'
 
 module.exports = (repo) ->
   cwd = repo.getWorkingDirectory()
-  git.cmd(['stash', 'drop'], {cwd})
+  git.cmd(['stash', 'drop'], {cwd}, color: true)
   .then (msg) ->
-    OutputViewManager.create().addLine(msg).finish() if msg isnt ''
+    OutputViewManager.create().setContent(msg).finish() if msg isnt ''
   .catch (msg) ->
     notifier.addInfo msg

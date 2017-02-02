@@ -34,7 +34,10 @@ selectKeyMap =
   Shift: 'shiftKey',
   Alt:   'altKey',
   Ctrl:  'ctrlKey',
-  None:  null
+
+selectKeyMap.Cmd = 'metaKey' if os.platform() == 'darwin'
+
+selectKeyMap.None = null
 
 inputCfg = defaultCfg
 
@@ -50,7 +53,7 @@ module.exports =
       default: defaultCfg.mouseName
 
     selectKeyTrigger:
-      ttile: "Select Key"
+      title: "Select Key"
       description: "The key that will trigger column selection.
         If empty, the default will be used #{defaultCfg.selectKeyName} key."
       type: 'string'
@@ -74,8 +77,10 @@ module.exports =
     @observers.push atom.workspace.onDidDestroyPane          @switch_editor_handler
 
   deactivate: ->
-    @editor_handler.unsubscribe()
+    @editor_handler?.unsubscribe()
     observer.dispose() for observer in @observers
+    @observers = null
+    @editor_handler = null
 
   switch_editor_handler: =>
     @editor_handler?.unsubscribe()

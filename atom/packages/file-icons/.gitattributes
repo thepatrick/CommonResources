@@ -1,2 +1,3 @@
-# Prevent the icon-font's source from cluttering diffs
-selection.json -diff
+/lib/icons/.icondb.js linguist-vendored
+/preview.png export-ignore
+/test/ export-ignore

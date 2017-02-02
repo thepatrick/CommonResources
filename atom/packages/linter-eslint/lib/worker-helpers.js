@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getNodePrefixPath = getNodePrefixPath;
+exports.findESLintDirectory = findESLintDirectory;
 exports.getESLintFromDirectory = getESLintFromDirectory;
 exports.refreshModulesPath = refreshModulesPath;
 exports.getESLintInstance = getESLintInstance;
@@ -15,6 +16,10 @@ exports.getArgv = getArgv;
 var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
+
+var _fs = require('fs');
+
+var _fs2 = _interopRequireDefault(_fs);
 
 var _child_process = require('child_process');
 
@@ -52,25 +57,58 @@ function getNodePrefixPath() {
   return Cache.NODE_PREFIX_PATH;
 }
 
-function getESLintFromDirectory(modulesDir, config) {
-  var ESLintDirectory = null;
-
+function findESLintDirectory(modulesDir, config, projectPath) {
+  var eslintDir = null;
+  var locationType = null;
   if (config.useGlobalEslint) {
+    locationType = 'global';
     var prefixPath = config.globalNodePath || getNodePrefixPath();
     if (process.platform === 'win32') {
-      ESLintDirectory = _path2.default.join(prefixPath, 'node_modules', 'eslint');
+      eslintDir = _path2.default.join(prefixPath, 'node_modules', 'eslint');
     } else {
-      ESLintDirectory = _path2.default.join(prefixPath, 'lib', 'node_modules', 'eslint');
+      eslintDir = _path2.default.join(prefixPath, 'lib', 'node_modules', 'eslint');
     }
+  } else if (!config.advancedLocalNodeModules) {
+    locationType = 'local project';
+    eslintDir = _path2.default.join(modulesDir || '', 'eslint');
+  } else if (_path2.default.isAbsolute(config.advancedLocalNodeModules)) {
+    locationType = 'advanced specified';
+    eslintDir = _path2.default.join(config.advancedLocalNodeModules || '', 'eslint');
   } else {
-    ESLintDirectory = _path2.default.join(modulesDir || '', 'eslint');
+    locationType = 'advanced specified';
+    eslintDir = _path2.default.join(projectPath, config.advancedLocalNodeModules, 'eslint');
   }
   try {
+    if (_fs2.default.statSync(eslintDir).isDirectory()) {
+      return {
+        path: eslintDir,
+        type: locationType
+      };
+    }
+  } catch (e) {
+    if (config.useGlobalEslint && e.code === 'ENOENT') {
+      throw new Error('ESLint not found, Please install or make sure Atom is getting $PATH correctly');
+    }
+  }
+  return {
+    path: Cache.ESLINT_LOCAL_PATH,
+    type: 'bundled fallback'
+  };
+}
+
+function getESLintFromDirectory(modulesDir, config, projectPath) {
+  var _findESLintDirectory = findESLintDirectory(modulesDir, config, projectPath);
+
+  var ESLintDirectory = _findESLintDirectory.path;
+
+  try {
+    // eslint-disable-next-line import/no-dynamic-require
     return require(_path2.default.join(ESLintDirectory, 'lib', 'cli.js'));
   } catch (e) {
     if (config.useGlobalEslint && e.code === 'MODULE_NOT_FOUND') {
       throw new Error('ESLint not found, Please install or make sure Atom is getting $PATH correctly');
     }
+    // eslint-disable-next-line import/no-dynamic-require
     return require(_path2.default.join(Cache.ESLINT_LOCAL_PATH, 'lib', 'cli.js'));
   }
 }
@@ -83,10 +121,10 @@ function refreshModulesPath(modulesDir) {
   }
 }
 
-function getESLintInstance(fileDir, config) {
-  var modulesDir = _path2.default.dirname((0, _atomLinter.findCached)(fileDir, 'node_modules/eslint'));
+function getESLintInstance(fileDir, config, projectPath) {
+  var modulesDir = _path2.default.dirname((0, _atomLinter.findCached)(fileDir, 'node_modules/eslint') || '');
   refreshModulesPath(modulesDir);
-  return getESLintFromDirectory(modulesDir, config);
+  return getESLintFromDirectory(modulesDir, config, projectPath || '');
 }
 
 function getConfigPath(fileDir) {
@@ -96,6 +134,7 @@ function getConfigPath(fileDir) {
   }
 
   var packagePath = (0, _atomLinter.findCached)(fileDir, 'package.json');
+  // eslint-disable-next-line import/no-dynamic-require
   if (packagePath && Boolean(require(packagePath).eslintConfig)) {
     return packagePath;
   }
@@ -114,7 +153,7 @@ function getRelativePath(fileDir, filePath, config) {
   return _path2.default.basename(filePath);
 }
 
-function getArgv(type, config, filePath, fileDir, givenConfigPath) {
+function getArgv(type, config, rules, filePath, fileDir, givenConfigPath) {
   var configPath = void 0;
   if (givenConfigPath === null) {
     configPath = config.eslintrcPath || null;
@@ -141,6 +180,9 @@ function getArgv(type, config, filePath, fileDir, givenConfigPath) {
   }
   if (configPath) {
     argv.push('--config', (0, _resolveEnv2.default)(configPath));
+  }
+  if (rules && Object.keys(rules).length > 0) {
+    argv.push('--rule', JSON.stringify(rules));
   }
   if (config.disableEslintIgnore) {
     argv.push('--no-ignore');

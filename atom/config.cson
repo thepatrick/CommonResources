@@ -23,7 +23,7 @@
     ]
   editor:
     fontFamily: "Menlo"
-    fontSize: 15
+    fontSize: 16
     invisibles: {}
     preferredLineLength: 100
     showIndentGuide: true
@@ -32,8 +32,11 @@
     userId: "a798c3f9-7919-14a8-f181-111c447986b3"
   "file-icons":
     coloured: false
+  "git-plus":
+    general:
+      _analyticsUserId: "6dfa085e-e0ec-41ce-bbf2-f69a8cd7eb79"
   linter:
-    errorPanelHeight: 48
+    errorPanelHeight: 22
     statusBar: "Show all errors"
     subtleLinterErrors: [
       "jscs"

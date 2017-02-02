@@ -4,29 +4,29 @@
 function rippleClick(event) {
     var item = event.target;
 
-    if (item) {
-        let rect = item.getBoundingClientRect();
-        let x = (event.clientX || 80) - rect.left;
-        let y = (event.clientY || 24) - rect.top;
-        let ink;
+    if (!item) return;
 
-        if (item.querySelectorAll('.ink').length === 0) {
-            let ink = document.createElement('span');
+    const rect = item.getBoundingClientRect();
+    const x = (event.clientX || 80) - rect.left;
+    const y = (event.clientY || 24) - rect.top;
+    let ink;
 
-            ink.classList.add('ink');
-            item.appendChild(ink);
-        }
+    if (item.querySelectorAll('.ink').length === 0) {
+        ink = document.createElement('span');
 
-        ink = item.querySelector('.ink');
-        ink.style.left = x + 'px';
-        ink.style.top = y + 'px';
-
-        setTimeout(() => {
-            if (ink && ink.parentElement) {
-                ink.parentElement.removeChild(ink);
-            }
-        }, 1000);
+        ink.classList.add('ink');
+        item.appendChild(ink);
     }
+
+    ink = item.querySelector('.ink');
+    ink.style.left = x + 'px';
+    ink.style.top = y + 'px';
+
+    setTimeout(() => {
+        if (ink && ink.parentElement) {
+            ink.parentElement.removeChild(ink);
+        }
+    }, 1000);
 }
 
 function apply() {
@@ -34,9 +34,9 @@ function apply() {
 
     // Ripple Effect for Tabs
     if (tabs) {
-        for (let i = 0; i < tabs.length; i++) {
-            tabs[i].removeEventListener('click', rippleClick);
-            tabs[i].addEventListener('click', rippleClick);
+        Array.from(tabs).forEach((tab) => {
+            tab.removeEventListener('click', rippleClick);
+            tab.addEventListener('click', rippleClick);
 
             atom.workspace.onDidChangeActivePaneItem(() => {
                 var activeTab = document.querySelector('.tab-bar .tab.active');
@@ -45,7 +45,7 @@ function apply() {
                     activeTab.click();
                 }
             });
-        }
+        });
     }
 }
 

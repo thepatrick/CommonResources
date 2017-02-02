@@ -3,6 +3,7 @@
 .list-tree, .list-group {
     li:not(.list-nested-item):not(.tabBlender), li.list-nested-item > .list-item {
         line-height: 3.25em;
+        color: @text-color;
 
         &.selected {
             position: relative;
@@ -23,6 +24,9 @@
         &.status-removed {
             color: @md-red;
         }
+        &.status-ignored {
+            color: fade(@text-color, 40%);
+        }
         .name {
             position: relative;
             z-index: 10;
@@ -40,6 +44,9 @@
         }
         &.status-removed:not(.selected) > .list-item {
             color: @md-red;
+        }
+        &.status-ignored:not(.selected) > .list-item {
+            color: fade(@text-color, 40%);
         }
     }
     .selected::before {
@@ -67,11 +74,11 @@
     }
 }
 .select-list, .popover-list {
-    atom-text-editor[mini], atom-text-editor[mini]::shadow {
+    atom-text-editor[mini], atom-text-editor[mini].editor {
         height: auto;
     }
     .styleguide & {
-        atom-text-editor[mini], atom-text-editor[mini]::shadow {
+        atom-text-editor[mini], atom-text-editor[mini].editor {
             height: auto;
         }
     }

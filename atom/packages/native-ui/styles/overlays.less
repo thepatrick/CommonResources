@@ -6,10 +6,11 @@ atom-panel.modal,
   padding: @component-padding;
   border-radius: @border-radius--base;
 
-  atom-text-editor[mini] {
+  .editor.mini {
     margin-bottom: @component-padding;
   }
 
+  // Search results
   .select-list ol.list-group,
   &.select-list ol.list-group {
     background-color: @input-background-color;
@@ -18,7 +19,9 @@ atom-panel.modal,
 
     li {
       padding: @component-padding;
-      border-bottom: 1px solid @tab-bar-border-color;
+      border-bottom: 1px solid lighten(@base-border-color, 5%);
+      margin-left: 1px; // otherwise box-shadow and border overlap
+      margin-right: 1px;
 
       &.two-lines {
         padding: @component-padding/2 @component-padding;
@@ -43,23 +46,29 @@ atom-panel.modal,
         background-color: @background-color-selected;
         border-bottom-color: @background-color-selected;
         box-shadow: 0 -1px 0 0 @background-color-selected;
+        margin-left: 0; // nullify the margin of `li`
+        margin-right: 0;
+        padding-left: @component-padding + 1;
+        padding-right: @component-padding + 1;
       }
 
       .status.icon {
         float: right;
         margin-left: @component-icon-padding;
+
         &:before {
           margin-right: 0;
         }
       }
     }
-
   }
 }
 
+// Frame for the autocomplete suggestions
 .select-list.popover-list {
   border-radius: @border-radius--base; // make the box shadow follow the rounded edges of the children
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.22), 0 14px 56px rgba(0, 0, 0, 0.25);
+  background: transparent;
 }
 
 .select-list.corrections {
@@ -67,11 +76,14 @@ atom-panel.modal,
   border-radius: @border-radius--base;
 }
 
+// The window itself
 atom-panel.modal {
-  top: 20% !important;
+  top: 16% !important;
   border-top-right-radius: @border-radius--base !important;
   border-top-left-radius: @border-radius--base !important;
-  box-shadow: 0 15px 24px rgba(0, 0, 0, 0.22), 0 19px 76px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 15px 24px rgba(0, 0, 0, 0.22),
+    0 19px 76px rgba(0, 0, 0, 0.3);
 
   .select-list .error-message {
     font-size: 1.1rem;
@@ -90,8 +102,8 @@ atom-panel.modal {
 .key-binding {
   font-family: @font-family;
   border-radius: @border-radius--base;
-  border: none;
-  box-shadow: 0 0 0 1px @tab-bar-border-color-transparent;
+  letter-spacing: 0.1rem;
+  box-shadow: 0 1px 1px 0 @tab-bar-border-color-transparent;
 }
 
 autocomplete-suggestion-list .suggestion-list-scroller {

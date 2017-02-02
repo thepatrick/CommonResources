@@ -6,20 +6,24 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.spawnWorker = spawnWorker;
 exports.showError = showError;
-exports.ruleURI = ruleURI;
+exports.idsToIgnoredRules = idsToIgnoredRules;
+exports.validatePoint = validatePoint;
 
 var _child_process = require('child_process');
 
 var _child_process2 = _interopRequireDefault(_child_process);
 
-var _atom = require('atom');
-
 var _processCommunication = require('process-communication');
 
 var _path = require('path');
 
+var _atom = require('atom');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var RULE_OFF_SEVERITY = 0;
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/extensions
 function spawnWorker() {
   var env = Object.create(process.env);
 
@@ -37,13 +41,16 @@ function spawnWorker() {
     console.log('[Linter-ESLint] STDERR', chunk.toString());
   });
 
-  return { worker: worker, subscription: new _atom.Disposable(function () {
+  return {
+    worker: worker,
+    subscription: new _atom.Disposable(function () {
       worker.kill();
-    }) };
+    })
+  };
 }
 
 function showError(givenMessage) {
-  var givenDetail = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+  var givenDetail = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   var detail = void 0;
   var message = void 0;
@@ -60,47 +67,19 @@ function showError(givenMessage) {
   });
 }
 
-function ruleURI(ruleId) {
-  var ruleParts = ruleId.split('/');
+function idsToIgnoredRules() {
+  var ruleIds = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
-  if (ruleParts.length === 1) {
-    return 'http://eslint.org/docs/rules/' + ruleId;
-  }
+  return ruleIds.reduce(function (ids, id) {
+    ids[id] = RULE_OFF_SEVERITY;
+    return ids;
+  }, {});
+}
 
-  var pluginName = ruleParts[0];
-  var ruleName = ruleParts[1];
-  switch (pluginName) {
-    case 'angular':
-      return 'https://github.com/Gillespie59/eslint-plugin-angular/blob/master/docs/' + ruleName + '.md';
-
-    case 'ava':
-      return 'https://github.com/avajs/eslint-plugin-ava/blob/master/docs/rules/' + ruleName + '.md';
-
-    case 'import':
-      return 'https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/' + ruleName + '.md';
-
-    case 'import-order':
-      return 'https://github.com/jfmengels/eslint-plugin-import-order/blob/master/docs/rules/' + ruleName + '.md';
-
-    case 'jasmine':
-      return 'https://github.com/tlvince/eslint-plugin-jasmine/blob/master/docs/rules/' + ruleName + '.md';
-
-    case 'jsx-a11y':
-      return 'https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/' + ruleName + '.md';
-
-    case 'lodash':
-      return 'https://github.com/wix/eslint-plugin-lodash/blob/master/docs/rules/' + ruleName + '.md';
-
-    case 'mocha':
-      return 'https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/' + ruleName + '.md';
-
-    case 'promise':
-      return 'https://github.com/xjamundx/eslint-plugin-promise#' + ruleName;
-
-    case 'react':
-      return 'https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/' + ruleName + '.md';
-
-    default:
-      return 'https://github.com/AtomLinter/linter-eslint/wiki/Linking-to-Rule-Documentation';
+function validatePoint(textEditor, line, col) {
+  var buffer = textEditor.getBuffer();
+  // Clip the given point to a valid one, and check if it equals the original
+  if (!buffer.clipPosition([line, col]).isEqual([line, col])) {
+    throw new Error(line + ':' + col + ' isn\'t a valid point!');
   }
 }

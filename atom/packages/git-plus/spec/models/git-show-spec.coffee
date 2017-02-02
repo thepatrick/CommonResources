@@ -1,5 +1,5 @@
+Path = require 'path'
 fs = require 'fs-plus'
-Path = require 'flavored-path'
 Os = require 'os'
 git = require '../../lib/git'
 {repo, pathToRepoFile} = require '../fixtures'
@@ -14,6 +14,12 @@ describe "GitShow", ->
     args = git.cmd.mostRecentCall.args[0]
     expect('show' in args).toBe true
     expect(pathToRepoFile in args).toBe true
+
+  it "uses the format option from package settings", ->
+    atom.config.set('git-plus.general.showFormat', 'fuller')
+    GitShow repo, 'foobar-hash', pathToRepoFile
+    args = git.cmd.mostRecentCall.args[0]
+    expect('--format=fuller' in args).toBe true
 
   it "writes the output to a file", ->
     spyOn(fs, 'writeFile').andCallFake ->

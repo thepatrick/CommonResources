@@ -1,6 +1,6 @@
 @import "ui-variables";
 
-atom-text-editor[mini], atom-text-editor[mini]::shadow {
+atom-text-editor[mini], atom-text-editor[mini].editor {
     position: relative;
     color: @text-color;
     background-color: transparent;
@@ -13,6 +13,11 @@ atom-text-editor[mini], atom-text-editor[mini]::shadow {
     box-shadow: inset 0 -1px 0 0 fade(@text-color, 10%);
     transition: all 250ms ease;
 
+    .paint-cursor & {
+        .cursor {
+            border-color: @base-color;
+        }
+    }
     &::before {
         content: '';
         position: absolute;
@@ -39,9 +44,20 @@ atom-text-editor[mini], atom-text-editor[mini]::shadow {
         }
     }
 }
-atom-text-editor, atom-text-editor::shadow {
+atom-text-editor, atom-text-editor.editor {
     text-rendering: optimizeLegibility;
 
+    .paint-cursor & {
+        .cursor {
+            border-color: @base-color;
+        }
+        .gutter .cursor-line {
+            color: @accent-color;
+        }
+        .gutter .cursor-line-no-selection {
+            color: @base-color;
+        }
+    }
     .find-result {
         .region {
             background: fade(@text-color, 15%);
@@ -51,7 +67,7 @@ atom-text-editor, atom-text-editor::shadow {
         }
     }
 }
-atom-text-editor[mini].is-focused, atom-text-editor[mini].is-focused::shadow {
+atom-text-editor[mini].is-focused, atom-text-editor[mini].is-focused.editor {
     background-color: transparent;
 
     &::before {

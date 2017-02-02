@@ -17,13 +17,16 @@ module.exports = {
             recommended: true
         },
 
-        schema: []
+        schema: [],
+
+        fixable: "code"
     },
 
-    create: function(context) {
+    create(context) {
+        const sourceCode = context.getSourceCode();
 
         // Node types which have a test which will coerce values to booleans.
-        var BOOLEAN_NODE_TYPES = [
+        const BOOLEAN_NODE_TYPES = [
             "IfStatement",
             "DoWhileStatement",
             "WhileStatement",
@@ -36,7 +39,7 @@ module.exports = {
          *
          * @param {Object} node The node
          * @param {Object} parent Its parent
-         * @returns {Boolean} If it is in a boolean context
+         * @returns {boolean} If it is in a boolean context
          */
         function isInBooleanContext(node, parent) {
             return (
@@ -51,8 +54,8 @@ module.exports = {
 
 
         return {
-            UnaryExpression: function(node) {
-                var ancestors = context.getAncestors(),
+            UnaryExpression(node) {
+                const ancestors = context.getAncestors(),
                     parent = ancestors.pop(),
                     grandparent = ancestors.pop();
 
@@ -70,18 +73,26 @@ module.exports = {
                         grandparent.callee.type === "Identifier" &&
                         grandparent.callee.name === "Boolean")
                 ) {
-                    context.report(node, "Redundant double negation.");
+                    context.report({
+                        node,
+                        message: "Redundant double negation.",
+                        fix: fixer => fixer.replaceText(parent, sourceCode.getText(node.argument))
+                    });
                 }
             },
-            CallExpression: function(node) {
-                var parent = node.parent;
+            CallExpression(node) {
+                const parent = node.parent;
 
                 if (node.callee.type !== "Identifier" || node.callee.name !== "Boolean") {
                     return;
                 }
 
                 if (isInBooleanContext(node, parent)) {
-                    context.report(node, "Redundant Boolean call.");
+                    context.report({
+                        node,
+                        message: "Redundant Boolean call.",
+                        fix: fixer => fixer.replaceText(node, sourceCode.getText(node.arguments[0]))
+                    });
                 }
             }
         };

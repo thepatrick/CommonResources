@@ -1,15 +1,46 @@
 {
-  "name": "change-case",
-  "main": "./lib/change-case",
-  "version": "0.6.0",
-  "description": "Change the case of selected text using node-change-case",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/robhurring/atom-change-case.git"
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/_7/w_jb42655515r4f129slqc_80000gn/T/d-117012-14300-1fee6lf/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/_7/w_jb42655515r4f129slqc_80000gn/T/d-117012-14300-1fee6lf/package.tgz",
+        "spec": "/private/var/folders/_7/w_jb42655515r4f129slqc_80000gn/T/d-117012-14300-1fee6lf/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/_7/w_jb42655515r4f129slqc_80000gn/T/apm-install-dir-117012-14300-3w8xq2"
+    ]
+  ],
+  "_from": "../d-117012-14300-1fee6lf/package.tgz",
+  "_id": "change-case@0.6.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/change-case",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/_7/w_jb42655515r4f129slqc_80000gn/T/d-117012-14300-1fee6lf/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/_7/w_jb42655515r4f129slqc_80000gn/T/d-117012-14300-1fee6lf/package.tgz",
+    "spec": "/private/var/folders/_7/w_jb42655515r4f129slqc_80000gn/T/d-117012-14300-1fee6lf/package.tgz",
+    "type": "local"
   },
-  "license": "MIT",
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-117012-14300-1fee6lf/package.tgz",
+  "_shasum": "dced11c306b0269e8d2a86b563137076aba4b6ce",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/_7/w_jb42655515r4f129slqc_80000gn/T/d-117012-14300-1fee6lf/package.tgz",
+  "_where": "/private/var/folders/_7/w_jb42655515r4f129slqc_80000gn/T/apm-install-dir-117012-14300-3w8xq2",
   "author": {
     "name": "Rob Hurring"
+  },
+  "bugs": {
+    "url": "https://github.com/robhurring/atom-change-case/issues"
   },
   "contributors": [
     {
@@ -23,55 +54,24 @@
       "email": "timo.j.sand@gmail.com"
     }
   ],
+  "dependencies": {
+    "change-case": "~3.0.0"
+  },
+  "description": "Change the case of selected text using node-change-case",
+  "devDependencies": {},
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {
-    "change-case": "~1.0.6"
-  },
+  "homepage": "https://github.com/robhurring/atom-change-case#readme",
+  "license": "MIT",
+  "main": "./lib/change-case",
+  "name": "change-case",
+  "optionalDependencies": {},
   "readme": "# Change Case Plugin\n[![Build Status](https://travis-ci.org/robhurring/atom-change-case.svg)](https://travis-ci.org/robhurring/atom-change-case)\n\nA wrapper around [node-change-case](https://github.com/blakeembrey/node-change-case) for atom.\n\nA quick way to change the case of the current selection.\n\n## Commands\n\n* change-case:camel\n* change-case:constant\n* change-case:dot\n* change-case:lower\n* change-case:param\n* change-case:pascal\n* change-case:path\n* change-case:sentence\n* change-case:snake\n* change-case:swap\n* change-case:title\n* change-case:upper\n* change-case:upperFirst\n",
   "readmeFilename": "README.md",
-  "bugs": {
-    "url": "https://github.com/robhurring/atom-change-case/issues"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robhurring/atom-change-case.git"
   },
-  "homepage": "https://github.com/robhurring/atom-change-case",
-  "_id": "change-case@0.6.0",
-  "_shasum": "a87f7d226be32eeb4817a60294be7963090a2544",
-  "_resolved": "file:../d-115629-11189-1xl9r21/package.tgz",
-  "_from": "../d-115629-11189-1xl9r21/package.tgz",
-  "_atomModuleCache": {
-    "version": 1,
-    "dependencies": [
-      {
-        "name": "change-case",
-        "version": "1.0.6",
-        "path": "node_modules/change-case/change-case.js"
-      }
-    ],
-    "extensions": {
-      ".coffee": [
-        "lib/change-case.coffee"
-      ],
-      ".js": [
-        "node_modules/change-case/change-case.js",
-        "node_modules/change-case/test.js"
-      ],
-      ".json": [
-        "node_modules/change-case/package.json",
-        "package.json"
-      ]
-    },
-    "folders": [
-      {
-        "paths": [
-          "lib",
-          "",
-          "spec"
-        ],
-        "dependencies": {
-          "change-case": "~1.0.6"
-        }
-      }
-    ]
-  }
+  "version": "0.6.3"
 }

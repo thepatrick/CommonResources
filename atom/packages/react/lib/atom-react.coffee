@@ -9,7 +9,7 @@ jsxTagStartPattern = '(?x)((^|=|return)\\s*<([^!/?](?!.+?(</.+?>))))'
 jsxComplexAttributePattern = '(?x)\\{ [^}"\']* $|\\( [^)"\']* $'
 decreaseIndentForNextLinePattern = '(?x)
 />\\s*(,|;)?\\s*$
-| ^\\s*\\S+.*</[-_\\.A-Za-z0-9]+>$'
+| ^(?!\\s*\\?)\\s*\\S+.*</[-_\\.A-Za-z0-9]+>$'
 
 class AtomReact
   config:
@@ -44,7 +44,7 @@ class AtomReact
       return fn.call(editor.languageMode, bufferRow, options) unless editor.getGrammar().scopeName == "source.js.jsx"
 
       scopeDescriptor = @editor.scopeDescriptorForBufferPosition([bufferRow, 0])
-      decreaseNextLineIndentRegex = @getRegexForProperty(scopeDescriptor, 'react.decreaseIndentForNextLinePattern')
+      decreaseNextLineIndentRegex = @cacheRegex(atom.config.get('react.decreaseIndentForNextLinePattern') || decreaseIndentForNextLinePattern)
       decreaseIndentRegex = @decreaseIndentRegexForScopeDescriptor(scopeDescriptor)
       increaseIndentRegex = @increaseIndentRegexForScopeDescriptor(scopeDescriptor)
 
@@ -76,11 +76,13 @@ class AtomReact
       return indent unless editor.getGrammar().scopeName == "source.js.jsx" and bufferRow > 1
 
       scopeDescriptor = @editor.scopeDescriptorForBufferPosition([bufferRow, 0])
-      decreaseNextLineIndentRegex = @getRegexForProperty(scopeDescriptor, 'react.decreaseIndentForNextLinePattern')
+
+      decreaseNextLineIndentRegex = @cacheRegex(atom.config.get('react.decreaseIndentForNextLinePattern') || decreaseIndentForNextLinePattern)
       increaseIndentRegex = @increaseIndentRegexForScopeDescriptor(scopeDescriptor)
+
       decreaseIndentRegex = @decreaseIndentRegexForScopeDescriptor(scopeDescriptor)
-      tagStartRegex = @getRegexForProperty(scopeDescriptor, 'react.jsxTagStartPattern')
-      complexAttributeRegex = @getRegexForProperty(scopeDescriptor, 'react.jsxComplexAttributePattern')
+      tagStartRegex = @cacheRegex(atom.config.get('react.jsxTagStartPattern') || jsxTagStartPattern)
+      complexAttributeRegex = @cacheRegex(atom.config.get('react.jsxComplexAttributePattern') || jsxComplexAttributePattern)
 
       precedingRow = @buffer.previousNonBlankRow(bufferRow)
 
@@ -123,7 +125,7 @@ class AtomReact
     path = require 'path'
 
     # Check if file extension is .jsx or the file requires React
-    extName = path.extname(editor.getPath())
+    extName = path.extname(editor.getPath() or '')
     if extName is ".jsx" or ((extName is ".js" or extName is ".es6") and @isReact(editor.getText()))
       jsxGrammar = atom.grammars.grammarsByScopeName["source.js.jsx"]
       editor.setGrammar jsxGrammar if jsxGrammar
@@ -216,7 +218,7 @@ class AtomReact
       # auto closing multiple cursors is a little bit tricky so lets disable it for now
       return if editor.getCursorBufferPositions().length > 1;
 
-      tokenizedLine = editor.displayBuffer?.tokenizedBuffer?.tokenizedLineForRow(eventObj.newRange.end.row)
+      tokenizedLine = editor.tokenizedBuffer?.tokenizedLineForRow(eventObj.newRange.end.row)
       return if not tokenizedLine?
 
       token = tokenizedLine.tokenAtBufferColumn(eventObj.newRange.end.column - 1)
@@ -251,7 +253,7 @@ class AtomReact
       row = eventObj.newRange.end.row
       fullLine = lines[row]
 
-      tokenizedLine = editor.displayBuffer?.tokenizedBuffer?.tokenizedLineForRow(eventObj.newRange.end.row)
+      tokenizedLine = editor.tokenizedBuffer?.tokenizedLineForRow(eventObj.newRange.end.row)
       return if not tokenizedLine?
 
       token = tokenizedLine.tokenAtBufferColumn(eventObj.newRange.end.column - 1)
@@ -318,15 +320,6 @@ class AtomReact
 
     @disposables = new CompositeDisposable();
 
-    jsxTagStartPattern = '(?x)((^|=|return)\\s*<([^!/?](?!.+?(</.+?>))))'
-    jsxComplexAttributePattern = '(?x)\\{ [^}"\']* $|\\( [^)"\']* $'
-    decreaseIndentForNextLinePattern = '(?x)
-    />\\s*(,|;)?\\s*$
-    | ^\\s*\\S+.*</[-_\\.A-Za-z0-9]+>$'
-
-    atom.config.set("react.jsxTagStartPattern", jsxTagStartPattern)
-    atom.config.set("react.jsxComplexAttributePattern", jsxComplexAttributePattern)
-    atom.config.set("react.decreaseIndentForNextLinePattern", decreaseIndentForNextLinePattern)
 
     # Bind events
     disposableConfigListener = atom.config.observe 'react.detectReactFilePattern', (newValue) ->

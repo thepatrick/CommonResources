@@ -1,3 +1,56 @@
+#### 1.3.0
+
+- Terminate flow servers on deactivate
+- Fix path.dirname deprecation by ignoring autocomplete requests on files not yet saved
+
+#### 1.2.4
+
+- Had to bump version because of some issues in deployment (network)
+
+#### 1.2.2
+
+- Handle coverage count zero (#52)
+
+#### 1.2.1
+
+- Fix flow type checking (#49)
+
+#### 1.2
+
+- Add Flow coverage view
+
+#### 1.1.10
+- Provide a default .flowconfig file if onlyIfAppropriate is enabled and a .flowconfig file is not found already
+
+#### 1.1.9
+
+- Fix autocompletion for properties (#33)
+- Remove types from function params (#8)
+
+#### 1.1.8
+
+- APM was having hiccups back then so didn't publish properly
+
+#### 1.1.7
+
+- Fix a bug in last release
+
+#### 1.1.6
+
+- Workaround a Atom's builtin babel bug
+
+#### 1.1.5
+
+- Just another patch to catch more flow errors gracefully
+
+#### 1.1.4
+
+- Handle flow crashes/respawns gracefully
+
+#### 1.1.3
+
+- Show entire linter error message
+
 #### 1.1.1-1.1.2
 
 - Fix a bug introduced in 1.1.0 where autocomplete wouldn't work

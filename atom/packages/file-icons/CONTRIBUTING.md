@@ -1,29 +1,34 @@
+Adding support for a new filetype
+=================================
+
+Refer to [`config.cson`][1] for instructions on defining a new icon-to-filetype mapping.
+
+Before editing the config, make sure you've installed the devDependencies:
+
+	apm install file-icons
+
+You're also encouraged to run package specs, particularly if you've changed existing icons.
+
+**NOTE:**  
+Changes to the config require a compilation step. The package does this automatically,
+but the results won't be visible until the window's been reloaded. Remember to include
+both [`config.cson`][1] and [`lib/icons/.icondb.js`][2] in your pull request.
+
+If the latter isn't being updated, please [file an issue][3].
+
+
+
 Adding new icons to the package
 ===============================
 
-If a desired icon isn't included in one of the [existing icon-font packages](README.md#fonts),
-you can add it to the package's custom icon set with [IcoMoon.io](https://icomoon.io/app/#/select):
-
-1. Click the **Import Icons** button in the top-left corner.
-
-2. Pick `selection.json` from the package's base directory.
-
-3. You may be presented with a dialogue asking *"Your icon selection was loaded. Would you like to load all the settings stored in your selection file?"*. If so, click **Yes**.
-
-4. Add your desired icon/s. If possible, make sure they're fitted to a square canvas: this ensures consistent sizing between themes.
-
-5. Export and extract the contents of the downloaded zip file:
-
-	a. Copy `file-icons.woff2` to your fork's `resources/fonts` directory.
-	
-	b. Copy `selection.json` to your fork's base directory.
-
+The package's icon-font is handled in its [own repository][4].
+Consult its [readme][5] for instructions on adding new icons.
 
 
 Updating the changelog
 ======================
 
-You're encouraged to include your contributions in the project's [change log](CHANGELOG.md).
+You're encouraged to include your contributions in the project's [change-log][6].
 Add a line that briefly summarises your additions (preferably 80 characters or less).
 Preserve the existing format so readers can grep what they're looking for when scanning the file:
 
@@ -31,7 +36,7 @@ Preserve the existing format so readers can grep what they're looking for when s
 	<dt>New icons:</dt>
 	<dd>
 		This should be used for icons that are quite literally <em>new</em>.
-		This may be a custom glyph (added in the process described above), or provided by an existing icon file.
+		This may be a custom glyph, or provided by an existing icon file.
 	</dd>
 	
 	<dt>Support:</dt>
@@ -41,5 +46,10 @@ Preserve the existing format so readers can grep what they're looking for when s
 	</dd>
 </dl>
 
-Before publishing a release, remember to replace `[Unreleased]` with the name of the version you're cutting.
-Make sure to specify a new comparison link at the bottom of the changelog.
+
+[1]: config.cson
+[2]: lib/icons/.icondb.js
+[3]: https://github.com/file-icons/atom/issues/new
+[4]: https://github.com/file-icons/source
+[5]: https://github.com/file-icons/source#adding-new-icons
+[6]: CHANGELOG.md

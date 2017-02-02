@@ -1,5 +1,29 @@
 # Changelog
 
+## v8.0.0
+
+*   Update ESLint to v3.5.0 ([#692](https://github.com/AtomLinter/linter-eslint/pull/692))
+*   Add setting for rules to silence while typing ([#666](https://github.com/AtomLinter/linter-eslint/pull/666))
+*   Update ESLint to v3.6.0 ([#713](https://github.com/AtomLinter/linter-eslint/pull/713))
+*   Add a debug information command ([#730](https://github.com/AtomLinter/linter-eslint/pull/730))
+*   Add support for `endLine` and `endColumn` in ESLint messages ([#709](https://github.com/AtomLinter/linter-eslint/pull/709))
+
+## v7.3.2
+
+*   Fix a race condition with modified editor text ([#703](https://github.com/AtomLinter/linter-eslint/pull/703))
+
+## v7.3.1
+
+*   Throw original error for invalid ranges ([#694](https://github.com/AtomLinter/linter-eslint/pull/694))
+
+## v7.3.0
+
+*   Fix sending `null` to `path.dirname()` for future Electron compatibility ([#673](https://github.com/AtomLinter/linter-eslint/pull/673))
+*   Use `eslint-rule-documentation` to get help URL's for rules ([#657](https://github.com/AtomLinter/linter-eslint/pull/657))
+*   Correctly ignore the messages from ESLint about ignored files ([#670](https://github.com/AtomLinter/linter-eslint/pull/670))
+*   Make the scopes linter-eslint runs on configurable ([#629](https://github.com/AtomLinter/linter-eslint/pull/629))
+*   Move configuration to the `package.json` ([#619](https://github.com/AtomLinter/linter-eslint/pull/619))
+
 ## v7.2.4
 
 *   Bump minimum Atom version to v1.8.0

@@ -11,7 +11,8 @@ Commands =
   path: 'pathCase'
   sentence: 'sentenceCase'
   snake: 'snakeCase'
-  switch: 'switchCase'
+  switch: 'swapCase'
+  swap: 'swapCase'
   title: 'titleCase'
   upper: 'upperCase'
   upperFirst: 'upperCaseFirst'
@@ -29,12 +30,11 @@ makeCommand = (command) ->
     method = Commands[command]
     converter = ChangeCase[method]
 
-    options = {}
-    options.wordRegex = /^[\t ]*$|[^\s\/\\\(\)"':,\.;<>~!@#\$%\^&\*\|\+=\[\]\{\}`\?]+/g
-    for cursor in editor.getCursors()
-      position = cursor.getBufferPosition()
+    editor.mutateSelectedText (selection) ->
+      if selection.isEmpty()
+        selection.selectWord()
 
-      range = cursor.getCurrentWordBufferRange(options)
-      text = editor.getTextInBufferRange(range)
+      text = selection.getText()
       newText = converter(text)
-      editor.setTextInBufferRange(range, newText)
+
+      selection.insertText newText, select: true

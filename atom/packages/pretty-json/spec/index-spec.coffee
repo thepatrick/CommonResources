@@ -13,14 +13,16 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('large.json')
           .then (editor) ->
-            PrettyJSON.prettify editor, false
+            PrettyJSON.prettify editor,
+              sorted: false
 
   describe 'when prettifying large integers', ->
     it 'does not truncate integers', ->
       waitsForPromise ->
         atom.workspace.open('bigint.json')
           .then (editor) ->
-            PrettyJSON.prettify editor, false
+            PrettyJSON.prettify editor,
+              sorted: false
             expect(editor.getText()).toBe """
             {
               "bigint": 6926665213734576388,
@@ -33,7 +35,8 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('valid.md')
           .then (editor) ->
-            PrettyJSON.prettify editor, false
+            PrettyJSON.prettify editor,
+              sorted: false
             expect(editor.getText()).toBe """
               Start
               { "c": "d", "a": "b" }
@@ -46,8 +49,9 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('valid.md')
           .then (editor) ->
-            editor.setSelectedBufferRange([[1,0], [1, 22]])
-            PrettyJSON.prettify editor, false
+            editor.setSelectedBufferRange([[1, 0], [1, 22]])
+            PrettyJSON.prettify editor,
+              sorted: false
             expect(editor.getText()).toBe """
               Start
               {
@@ -63,8 +67,9 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('invalid.md')
           .then (editor) ->
-            editor.setSelectedBufferRange([[1,0], [1, 2]])
-            PrettyJSON.prettify editor, false
+            editor.setSelectedBufferRange([[1, 0], [1, 2]])
+            PrettyJSON.prettify editor,
+              sorted: false
             expect(editor.getText()).toBe """
             Start
             {]
@@ -77,7 +82,8 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('invalid.json')
           .then (editor) ->
-            PrettyJSON.prettify editor, false
+            PrettyJSON.prettify editor,
+              sorted: false
             expect(editor.getText()).toBe """
             { "c": "d", "a": "b", }
 
@@ -88,7 +94,8 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('valid.json')
           .then (editor) ->
-            PrettyJSON.prettify editor, false
+            PrettyJSON.prettify editor,
+              sorted: false
             expect(editor.getText()).toBe """
               {
                 "c": "d",
@@ -101,7 +108,8 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('invalid.json')
           .then (editor) ->
-            PrettyJSON.prettify editor, true
+            PrettyJSON.prettify editor,
+              sorted: true
             expect(editor.getText()).toBe """
             { "c": "d", "a": "b", }
 
@@ -112,7 +120,8 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('valid.json')
           .then (editor) ->
-            PrettyJSON.prettify editor, true
+            PrettyJSON.prettify editor,
+              sorted: true
             expect(editor.getText()).toBe """
               {
                 "a": "b",
@@ -125,7 +134,7 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('invalid.json')
           .then (editor) ->
-            PrettyJSON.minify editor, false
+            PrettyJSON.minify editor
             expect(editor.getText()).toBe """
             { "c": "d", "a": "b", }
 
@@ -136,7 +145,7 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('valid.json')
           .then (editor) ->
-            PrettyJSON.minify editor, false
+            PrettyJSON.minify editor
             expect(editor.getText()).toBe """
               {"c":"d","a":"b"}
             """
@@ -146,8 +155,8 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('valid.md')
           .then (editor) ->
-            editor.setSelectedBufferRange([[1,0], [1, 22]])
-            PrettyJSON.minify editor, false
+            editor.setSelectedBufferRange([[1, 0], [1, 22]])
+            PrettyJSON.minify editor
             expect(editor.getText()).toBe """
               Start
               {"c":"d","a":"b" }
@@ -160,7 +169,8 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('object.json')
           .then (editor) ->
-            PrettyJSON.jsonify editor, false
+            PrettyJSON.jsonify editor,
+              sorted: false
             expect(editor.getText()).toBe """
               {
                 "c": 3,
@@ -173,10 +183,58 @@ describe 'Pretty JSON', ->
       waitsForPromise ->
         atom.workspace.open('object.json')
           .then (editor) ->
-            PrettyJSON.jsonify editor, true
+            PrettyJSON.jsonify editor,
+              sorted: true
             expect(editor.getText()).toBe """
               {
                 "a": 1,
                 "c": 3
               }
             """
+
+  describe 'Sort and prettify JSON file with BigNumbers', ->
+    it 'does not destroy formatting of numbers', ->
+      waitsForPromise ->
+        atom.workspace.open('stats.json')
+          .then (editor) ->
+            PrettyJSON.prettify editor,
+              sorted: true
+            expect(editor.getText()).toBe """
+              {
+                "DV": [
+                  {
+                    "BC": 100,
+                    "Chromosome": "chr22",
+                    "PopulationFrequencyEthnicBackground": "20.316622691292874",
+                    "PopulationFrequencyGeneral": "29.716117216117215",
+                    "RQ": null,
+                    "ZW": [
+                    ]
+                  }
+                ]
+              }
+            """
+
+  describe 'when a valid json text is selected', ->
+    it 'formats it correctly, and selects the formatted text', ->
+      waitsForPromise ->
+        atom.workspace.open('selected.json')
+          .then (editor) ->
+            editor.setSelectedBufferRange([[0, 0], [0, 32]])
+            PrettyJSON.prettify editor,
+              sorted: false
+            expect(editor.getText()).toBe """
+              {
+                "key": {
+                  "key": {
+                    "key": "value"
+                  }
+                }
+              }
+
+            """
+            range = editor.getSelectedBufferRange()
+            expect(range.start.row).toBe 0
+            expect(range.start.column).toBe 0
+            expect(range.end.row).toBe 6
+            expect(range.end.column).toBe 1

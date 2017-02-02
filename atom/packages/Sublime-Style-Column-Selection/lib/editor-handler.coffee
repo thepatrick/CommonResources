@@ -1,3 +1,5 @@
+{Point} = require 'atom'
+
 module.exports =
   class SublimeSelectEditorHandler
     constructor: (editor, inputCfg) ->
@@ -48,7 +50,9 @@ module.exports =
         e.preventDefault()
         if @_mainMouseDown(e)
           @mouseEndPos = @_screenPositionForMouseEvent(e)
+          return if @mouseEndPos.isEqual @mouseEndPosPrev
           @_selectBoxAroundCursors()
+          @mouseEndPosPrev = @mouseEndPos
           return false
         if e.which == 0
           @_resetState()
@@ -89,11 +93,11 @@ module.exports =
       targetLeft       = pixelPosition.left
       defaultCharWidth = @editorBuffer.defaultCharWidth
       row              = Math.floor(targetTop / @editorBuffer.getLineHeightInPixels())
-      targetLeft       = Infinity if row > @editorBuffer.getLastRow()
-      row              = Math.min(row, @editorBuffer.getLastRow())
+      targetLeft       = Infinity if row > @editor.buffer.getLastRow()
+      row              = Math.min(row, @editor.buffer.getLastRow())
       row              = Math.max(0, row)
       column           = Math.round (targetLeft) / defaultCharWidth
-      return {row: row, column: column}
+      new Point(row, column)
 
     # methods for checking mouse/key state against config
     _mainMouseDown: (e) ->
@@ -108,21 +112,15 @@ module.exports =
     # Do the actual selecting
     _selectBoxAroundCursors: ->
       if @mouseStartPos and @mouseEndPos
-        allRanges = []
-        rangesWithLength = []
+        ranges = []
 
         for row in [@mouseStartPos.row..@mouseEndPos.row]
-          # Define a range for this row from the @mouseStartPos column number to
-          # the @mouseEndPos column number
-          range = [[row, @mouseStartPos.column], [row, @mouseEndPos.column]]
+          @mouseEndPos.column = 0 if @mouseEndPos.column < 0
+          rowLength = @editor.lineTextForScreenRow(row).length
+          if rowLength > @mouseStartPos.column or rowLength > @mouseEndPos.column
+            range = [[row, @mouseStartPos.column], [row, @mouseEndPos.column]]
+            ranges.push range
 
-          allRanges.push range
-          if @editor.getTextInBufferRange(range).length > 0
-            rangesWithLength.push range
-
-        # If there are ranges with text in them then only select those
-        # Otherwise select all the 0 length ranges
-        if rangesWithLength.length
-          @editor.setSelectedScreenRanges rangesWithLength
-        else if allRanges.length
-          @editor.setSelectedScreenRanges allRanges
+        if ranges.length
+          isReversed = @mouseEndPos.column < @mouseStartPos.column
+          @editor.setSelectedScreenRanges ranges, {reversed: isReversed}

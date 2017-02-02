@@ -8,7 +8,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-var astUtils = require("../ast-utils");
+const astUtils = require("../ast-utils");
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -31,6 +31,18 @@ function isIdentifier(node, name) {
  */
 function isUnreachable(segment) {
     return !segment.reachable;
+}
+
+/**
+* Checks whether a given node is a `constructor` method in an ES6 class
+* @param {ASTNode} node A node to check
+* @returns {boolean} `true` if the node is a `constructor` method
+*/
+function isClassConstructor(node) {
+    return node.type === "FunctionExpression" &&
+        node.parent &&
+        node.parent.type === "MethodDefinition" &&
+        node.parent.kind === "constructor";
 }
 
 //------------------------------------------------------------------------------
@@ -56,10 +68,10 @@ module.exports = {
         }]
     },
 
-    create: function(context) {
-        var options = context.options[0] || {};
-        var treatUndefinedAsUnspecified = options.treatUndefinedAsUnspecified === true;
-        var funcInfo = null;
+    create(context) {
+        const options = context.options[0] || {};
+        const treatUndefinedAsUnspecified = options.treatUndefinedAsUnspecified === true;
+        let funcInfo = null;
 
         /**
          * Checks whether of not the implicit returning is consistent if the last
@@ -69,7 +81,7 @@ module.exports = {
          * @returns {void}
          */
         function checkLastSegment(node) {
-            var loc, type;
+            let loc, type;
 
             /*
              * Skip if it expected no return value or unreachable.
@@ -77,7 +89,8 @@ module.exports = {
              */
             if (!funcInfo.hasReturnValue ||
                 funcInfo.codePath.currentSegments.every(isUnreachable) ||
-                astUtils.isES5Constructor(node)
+                astUtils.isES5Constructor(node) ||
+                isClassConstructor(node)
             ) {
                 return;
             }
@@ -86,7 +99,7 @@ module.exports = {
             if (node.type === "Program") {
 
                 // The head of program.
-                loc = {line: 1, column: 0};
+                loc = { line: 1, column: 0 };
                 type = "program";
             } else if (node.type === "ArrowFunctionExpression") {
 
@@ -110,33 +123,33 @@ module.exports = {
 
             // Reports.
             context.report({
-                node: node,
-                loc: loc,
+                node,
+                loc,
                 message: "Expected to return a value at the end of this {{type}}.",
-                data: {type: type}
+                data: { type }
             });
         }
 
         return {
 
             // Initializes/Disposes state of each code path.
-            onCodePathStart: function(codePath) {
+            onCodePathStart(codePath) {
                 funcInfo = {
                     upper: funcInfo,
-                    codePath: codePath,
+                    codePath,
                     hasReturn: false,
                     hasReturnValue: false,
                     message: ""
                 };
             },
-            onCodePathEnd: function() {
+            onCodePathEnd() {
                 funcInfo = funcInfo.upper;
             },
 
             // Reports a given return statement if it's inconsistent.
-            ReturnStatement: function(node) {
-                var argument = node.argument;
-                var hasReturnValue = Boolean(argument);
+            ReturnStatement(node) {
+                const argument = node.argument;
+                let hasReturnValue = Boolean(argument);
 
                 if (treatUndefinedAsUnspecified && hasReturnValue) {
                     hasReturnValue = !isIdentifier(argument, "undefined") && argument.operator !== "void";
@@ -145,9 +158,16 @@ module.exports = {
                 if (!funcInfo.hasReturn) {
                     funcInfo.hasReturn = true;
                     funcInfo.hasReturnValue = hasReturnValue;
-                    funcInfo.message = "Expected " + (hasReturnValue ? "a" : "no") + " return value.";
+                    funcInfo.message = "Expected {{which}} return value.";
+                    funcInfo.data = {
+                        which: hasReturnValue ? "a" : "no"
+                    };
                 } else if (funcInfo.hasReturnValue !== hasReturnValue) {
-                    context.report({node: node, message: funcInfo.message});
+                    context.report({
+                        node,
+                        message: funcInfo.message,
+                        data: funcInfo.data
+                    });
                 }
             },
 

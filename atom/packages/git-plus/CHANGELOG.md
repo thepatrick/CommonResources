@@ -1,5 +1,190 @@
 ## Changelog
 
+### 7.1.1
+- Fixes [#598](https://github.com/akonwi/git-plus/issues/598)
+- Fixes [#599](https://github.com/akonwi/git-plus/issues/599)
+
+### 7.1.0
+- Fixes [#573](https://github.com/akonwi/git-plus/issues/573)
+
+### 7.0.7
+- [[#587]](https://github.com/akonwi/git-plus/issues/587) - Refactoring around tree-view context actions
+
+### 7.0.6
+- [[#584]](https://github.com/akonwi/git-plus/issues/584)-The COMMIT_EDITMSG file is kept after commit attempts so in case of failure the previously typed message is easily retrievable
+- Fixes [#591](https://github.com/akonwi/git-plus/issues/591)
+- Fixes [#593](https://github.com/akonwi/git-plus/issues/593)
+
+### 7.0.5
+- [[#587]](https://github.com/akonwi/git-plus/issues/587) Gracefully handle unavailable repo error
+- Fixes [#578](https://github.com/akonwi/git-plus/issues/578)
+
+### 7.0.4
+- Minor changes
+
+### 7.0.3
+- More fixes for [#582](https://github.com/akonwi/git-plus/issues/582)
+
+### 7.0.2
+- Fixes config issue where none of the non-general configs were being used
+
+### 7.0.1
+- Fixes [#582](https://github.com/akonwi/git-plus/issues/582)
+
+### 7.0.0
+- Refactored package settings. This update will reset your configurations for this package as the config options have been refactored.
+- Add analytics to track which features are being used.
+
+### 6.4.0
+- Introducing Custom Commands. This is an experimental feature to allow users to define their own commonly used commands. Read about [them](https://github.com/akonwi/git-plus#experimental-features)
+
+### 6.3.0
+- Fixes [#395](https://github.com/akonwi/git-plus/issues/395)
+- Fixes [#408](https://github.com/akonwi/git-plus/issues/408)
+
+### 6.2.0
+- Introduce new setting 'Stage Files Beta', to combine the 'Stage Files' and 'Unstage Files' commands into a single command.
+
+### 6.0.2
+- Fixes [#579](https://github.com/akonwi/git-plus/issues/579)
+
+### 6.0.1
+- Fixes [#576](https://github.com/akonwi/git-plus/issues/576)
+
+### 6.0.0
+- __BREAKING__ The configuration option of 'Pull Before Push' is now a simple toggle and there is a second option 'Pull Rebase', which is also a toggle for whether to do all pulls with the `--rebase` flag.
+- Fixes [#235](https://github.com/akonwi/git-plus/issues/235)
+- Fixes [#576](https://github.com/akonwi/git-plus/issues/576)
+- Remove the experimental tag from the 'Verbose Commits' feature
+- Only show the `Init` command in the atom palette when there is no repo in the project
+
+### 5.29.1
+- Fixes [#568](https://github.com/akonwi/git-plus/issues/568)
+- Fixes [#405](https://github.com/akonwi/git-plus/issues/405)
+
+### 5.29.0
+- Fixes [#531](https://github.com/akonwi/git-plus/issues/531)
+- Fixes [#292](https://github.com/akonwi/git-plus/issues/292)
+- Remove the experimental tag from the 'Always pull from upstream' feature
+
+### 5.28.0
+- Display keyboard shortcuts for the commands in the Git Plus menu (@metatalker-[pr-566](https://github.com/akonwi/git-plus/pull/566))
+
+### 5.27.0
+- Added more commands to the tree-view context-menu
+  - `Add`, `Add + commit`, `Diff`, `Unstage`, `Checkout`
+
+### 5.25.5
+- Fix [#553](https://github.com/akonwi/git-plus/issues/553)
+- Refactoring
+
+### 5.25.4
+- Show error when attempting to push to pull from non-existent upstream branch.
+
+### 5.25.3
+- Fix [#548](https://github.com/akonwi/git-plus/issues/548)
+
+### 5.25.2
+- Fix [#545](https://github.com/akonwi/git-plus/issues/545)
+
+### 5.25.1
+- Use experimental toggle: 'Always Pull From Upstream', when pulling before pushing is enabled
+
+### 5.25.0
+- Adds new experimental toggle: 'Always Pull From Upstream', which will pull from your current branch upstream automatically without prompting you for a branch to pull from.
+- Fix [#538](https://github.com/akonwi/git-plus/issues/538)
+  - [#537](https://github.com/akonwi/git-plus/issues/537) has been left open as the original.
+
+### 5.24.2
+- Fix [#436](https://github.com/akonwi/git-plus/issues/436)
+- Fix [#529](https://github.com/akonwi/git-plus/issues/529)
+
+### 5.24.1
+- Fix [#515](https://github.com/akonwi/git-plus/issues/515)
+- Fix [#533](https://github.com/akonwi/git-plus/issues/533)
+
+### 5.25.4
+- Show error when attempting to push to pull from non-existent upstream branch.
+
+### 5.25.3
+- Fix [#548](https://github.com/akonwi/git-plus/issues/548)
+
+### 5.25.2
+- Fix [#545](https://github.com/akonwi/git-plus/issues/545)
+
+### 5.25.1
+- Use experimental toggle: 'Always Pull From Upstream', when pulling before pushing is enabled
+
+### 5.25.0
+- Adds new experimental toggle: 'Always Pull From Upstream', which will pull from your current branch upstream automatically without prompting you for a branch to pull from.
+- Fix [#538](https://github.com/akonwi/git-plus/issues/538)
+  - [#537](https://github.com/akonwi/git-plus/issues/537) has been left open as the original.
+
+### 5.24.2
+- Fix [#436](https://github.com/akonwi/git-plus/issues/436)
+- Fix [#529](https://github.com/akonwi/git-plus/issues/529)
+
+### 5.24.1
+- Fix [#515](https://github.com/akonwi/git-plus/issues/515)
+- Fix [#533](https://github.com/akonwi/git-plus/issues/533)
+
+### 5.24.0
+- This enables basic support for submodules. You should be able to add, commit, and diff files that belong to submodules.
+- Small performance improvements for initial loading of the package's command palette.
+
+### 5.23.3
+- Add new command, `Commit All and Push`
+- Fix [#509](https://github.com/akonwi/git-plus/issues/509) where multiple selected commits weren't being cherry picked.
+- Update README
+  - Table of commands contains info about using Tags.
+  - Add note for Windows users to check out [#224](https://github.com/akonwi/git-plus/issues/224) for troubleshooting pull/push problems
+
+### 5.23.2
+- Fix #459 [pr #459](https://github.com/akonwi/git-plus/issues/459)
+  - Output from commands executed by Git Run will be colored if git provides coloring
+
+### 5.22.1
+- Fix #448 [pr #514](https://github.com/akonwi/git-plus/issues/448)
+- Fix #517 [pr #514](https://github.com/akonwi/git-plus/issues/517)
+
+### 5.22.0
+- Adds a new command to do `git push -u`.
+  - The old push command automatically retried after a failure with the `-u` flag and that can completely ignore some pre-push hooks. Fixes [#422](https://github.com/akonwi/git-plus/issues/422)
+- Files can now be staged from the Tree-view with a Git add command in the context menu from right clicking files and folders.
+  - More commands can be added there with pull requests. See [#422](https://github.com/akonwi/git-plus/issues/422)
+  - This work also fixes an unreported bug where trying to open a difftool for a file from the tree-view that was different than the currently active file would not work.
+
+### 5.21.0
+- Includes a format option for the Git Show command in package settings. [pr #527](https://github.com/akonwi/git-plus/issues/527)
+
+### 5.20.0
+- Fix #510 [pr #514](https://github.com/akonwi/git-plus/issues/514)
+- Add new command (Add Modified) [pr #519](https://github.com/akonwi/git-plus/issues/519)
+
+### 5.19.0
+- Add new command (Merge without fast-forward) [pr #492](https://github.com/akonwi/git-plus/issues/492)
+
+### 5.18.3
+- Merge [pr #489](https://github.com/akonwi/git-plus/issues/489)
+
+### 5.18.2
+- Git show defaults to HEAD if input is left empty. [pr #481](https://github.com/akonwi/git-plus/issues/481)
+- Pin icon in status bar can now be disabled. [pr #488](https://github.com/akonwi/git-plus/issues/488)
+
+### 5.18.0
+- Enable activating the difftool on files and folders in the tree-view [pr #508](https://github.com/akonwi/git-plus/issues/508)
+- Allow the package to initialize immediately when atom loads
+
+### 5.17.1
+- Fix bugs with new diff highlighting [#511](https://github.com/akonwi/git-plus/issues/511)
+
+### 5.17.0
+- Add syntax highlighting to diffs [#507](https://github.com/akonwi/git-plus/issues/507)
+- Improves diff grammar and styling [#507](https://github.com/akonwi/git-plus/issues/507)
+
+### 5.16.2
+- Fix [#476](https://github.com/akonwi/git-plus/issues/476)
+
 ### 5.16.1
 - Fix [#472](https://github.com/akonwi/git-plus/issues/472)
 

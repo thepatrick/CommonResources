@@ -1,11 +1,13 @@
 'use babel'
+
 // Note: 'use babel' doesn't work in forked processes
-process.title = 'linter-eslint helper'
 
 import Path from 'path'
-import * as Helpers from './worker-helpers'
 import { create } from 'process-communication'
-import { FindCache } from 'atom-linter'
+import { FindCache, findCached } from 'atom-linter'
+import * as Helpers from './worker-helpers'
+
+process.title = 'linter-eslint helper'
 
 const ignoredMessages = [
   // V1
@@ -14,6 +16,11 @@ const ignoredMessages = [
   'File ignored because of a matching ignore pattern. Use --no-ignore to override.',
   // V2.11.1
   'File ignored because of a matching ignore pattern. Use "--no-ignore" to override.',
+  // supress warning that the current file is ignored by eslint by default
+  'File ignored by default.  Use a negated ignore pattern (like "--ignore-pattern \'!<relative'
+    + '/path/to/filename>\'") to override.',
+  'File ignored by default. Use "--ignore-pattern \'!node_modules/*\'" to override.',
+  'File ignored by default. Use "--ignore-pattern \'!bower_components/*\'" to override.',
 ]
 
 function lintJob(argv, contents, eslint, configPath, config) {
@@ -24,6 +31,7 @@ function lintJob(argv, contents, eslint, configPath, config) {
   return global.__LINTER_ESLINT_RESPONSE
     .filter(e => !ignoredMessages.includes(e.message))
 }
+
 function fixJob(argv, eslint) {
   try {
     eslint.execute(argv)
@@ -33,7 +41,7 @@ function fixJob(argv, eslint) {
   }
 }
 
-create().onRequest('job', ({ contents, type, config, filePath }, job) => {
+create().onRequest('job', ({ contents, type, config, filePath, projectPath, rules }, job) => {
   global.__LINTER_ESLINT_RESPONSE = []
 
   if (config.disableFSCache) {
@@ -41,16 +49,19 @@ create().onRequest('job', ({ contents, type, config, filePath }, job) => {
   }
 
   const fileDir = Path.dirname(filePath)
-  const eslint = Helpers.getESLintInstance(fileDir, config)
+  const eslint = Helpers.getESLintInstance(fileDir, config, projectPath)
   const configPath = Helpers.getConfigPath(fileDir)
   const relativeFilePath = Helpers.getRelativePath(fileDir, filePath, config)
 
-  const argv = Helpers.getArgv(type, config, relativeFilePath, fileDir, configPath)
+  const argv = Helpers.getArgv(type, config, rules, relativeFilePath, fileDir, configPath)
 
   if (type === 'lint') {
     job.response = lintJob(argv, contents, eslint, configPath, config)
   } else if (type === 'fix') {
     job.response = fixJob(argv, eslint)
+  } else if (type === 'debug') {
+    const modulesDir = Path.dirname(findCached(fileDir, 'node_modules/eslint') || '')
+    job.response = Helpers.findESLintDirectory(modulesDir, config)
   }
 })
 
