@@ -89,6 +89,18 @@ Host 10.0.2.*
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
 
+Host 10.0.3.*
+  User ec2-user
+  ProxyCommand ssh mantis002-dev nc -w 120 %h %p
+  IdentityFile ~/.ssh/pqg-dropbear-tests.pem
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+
+Host dropbear002-dev
+  User pqg
+  HostName 52.32.238.94
+  ForwardAgent yes
+
 # By default my username is patrick.
 Host *
   User patrick
