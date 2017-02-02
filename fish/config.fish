@@ -116,6 +116,10 @@ end
 
 set -x HOMEBREW_NO_ANALYTICS 1
 
+if test -e ~/.npmrc
+  set -x OPENTOK_NPM_TOKEN (grep auth ~/.npmrc | sed "s/.*=//g")
+end
+
 if test -e ~/.nvm
   set -x NVM_DIR ~/.nvm
   if test -e ~/.nvm/nvm.sh
@@ -136,6 +140,10 @@ if test -e ~/.nvm
   end
 else
   echo No ~/.nvm, disabling nvm helpers
+end
+
+if test -e (which thefuck)
+  eval (thefuck --alias crap | tr '\n' ';')
 end
 
 if test -e ~/.config/fish/config_local.fish
