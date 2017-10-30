@@ -146,6 +146,15 @@ if test -e (which thefuck)
   eval (thefuck --alias crap | tr '\n' ';')
 end
 
+# in .config.fish
+function fish_prompt
+  env FISH_VERSION=$FISH_VERSION PROMPTLINE_LAST_EXIT_CODE=$status bash $HOME/.config/fish/shell_prompt.sh left
+end
+
+function fish_right_prompt
+  env FISH_VERSION=$FISH_VERSION PROMPTLINE_LAST_EXIT_CODE=$status bash $HOME/.config/fish/shell_prompt.sh right
+end
+
 if test -e ~/.config/fish/config_local.fish
   source ~/.config/fish/config_local.fish
 end
