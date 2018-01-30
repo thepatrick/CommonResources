@@ -175,3 +175,5 @@ end
 # }
 #
 # # added by travis gem
+
+set -x GPG_TTY (tty)
