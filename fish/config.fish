@@ -159,6 +159,10 @@ if test -e ~/.config/fish/config_local.fish
   source ~/.config/fish/config_local.fish
 end
 
+function weather
+  curl 'wttr.in?m'
+end
+
 #func docker-cleanup
 #  docker rm (docker ps -qa --no-trunc --filter "status=exited")
 #  docker rmi (docker images --filter "dangling=true" -q --no-trunc)
@@ -175,5 +179,8 @@ end
 # }
 #
 # # added by travis gem
+
+set -x CLICOLOR 1
+set -x LSCOLORS GxFxCxDxBxegedabagaced
 
 set -x GPG_TTY (tty)
