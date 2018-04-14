@@ -143,8 +143,10 @@ else
   echo No ~/.nvm, disabling nvm helpers
 end
 
-if test -e (which thefuck)
-  eval (thefuck --alias crap | tr '\n' ';')
+if test (which thefuck)
+  if test -e (which thefuck)
+    eval (thefuck --alias crap | tr '\n' ';')
+  end
 end
 
 # in .config.fish
