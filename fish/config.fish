@@ -88,6 +88,7 @@ add_to_path ~/etc
 add_to_path /usr/local/heroku/bin # Added by the Heroku Toolbelt
 add_to_path $HOME/.rvm/bin        # Add RVM to PATH for scripting
 add_to_path $HOME/.local/bin      # pip install --user puts things here
+add_to_path $HOME/.tfenv/bin
 
 if test -e "/usr/bin/nano"
   set -x EDITOR nano
@@ -187,3 +188,4 @@ set -x CLICOLOR 1
 set -x LSCOLORS GxFxCxDxBxegedabagaced
 
 set -x GPG_TTY (tty)
+set -x EDITOR vim
