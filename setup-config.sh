@@ -33,7 +33,5 @@ fi
 setup_link `pwd`/fish ~/.config/fish
 setup_link `pwd`/fisherman ~/.config/fisherman
 
-setup_link `pwd`/atom ~/.atom
-
 git submodule init
 git submodule update
