@@ -1,0 +1,13 @@
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+foreground-color='rgb(248,248,241)'
+visible-name='Panic'
+palette=['rgb(87,88,81)', 'rgb(252,67,73)', 'rgb(64,233,55)', 'rgb(254,203,87)', 'rgb(58,88,117)', 'rgb(131,102,200)', 'rgb(115,213,233)', 'rgb(147,158,166)', 'rgb(21,38,56)', 'rgb(252,67,73)', 'rgb(64,233,55)', 'rgb(254,203,87)', 'rgb(58,88,117)', 'rgb(131,102,200)', 'rgb(115,213,233)', 'rgb(149,158,166)']
+use-system-font=false
+use-transparent-background=true
+use-theme-colors=false
+font='Ubuntu Mono derivative Powerline 12'
+use-theme-transparency=false
+bold-color-same-as-fg=false
+bold-color='rgb(255,255,255)'
+background-color='rgb(21,38,56)'
+background-transparency-percent=3
