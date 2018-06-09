@@ -91,6 +91,7 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
   
+  brew_cask_if_missing 1password "/Applications/1Password 7.app"
   brew_cask_if_missing iterm2 /Applications/iTerm.app
   brew_cask_if_missing visual-studio-code "/Applications/Visual Studio Code.app"
   brew_cask_if_missing keybase /Applications/Keybase.app
