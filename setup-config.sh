@@ -15,10 +15,28 @@ function setup_link() {
 	fi
 }
 
+function setup_dir() {
+  if [ ! -d $1 ]; then
+    mkdir -p $1
+  fi
+}
+
 function download_if_missing() {
   if [ ! -f $2 ]; then
     curl --silent $1 > $2
-      chmod +x $2
+    chmod +x $2
+  fi
+}
+
+function brew_if_missing() {
+  if [ ! -e "$2" ]; then
+    brew install "$1"
+  fi
+}
+
+function brew_cask_if_missing() {
+  if [ ! -d "$2" ]; then
+    brew cask install "$1"
   fi
 }
 
@@ -32,10 +50,8 @@ setup_link `pwd`/config/ssh/config ~/.ssh/config
 setup_link `pwd`/config/vimrc ~/.vimrc
 setup_link `pwd`/vim ~/.vim
 
-
-if [ ! -d ~/.config ]; then
-  mkdir ~/.config
-fi
+setup_dir ~/.config
+setup_dir ~/bin
 
 setup_link `pwd`/fish ~/.config/fish
 setup_link `pwd`/fisherman ~/.config/fisherman
@@ -67,12 +83,32 @@ if [ ! -d ~/.tfenv ]; then
   git clone https://github.com/kamatama41/tfenv.git ~/.tfenv
 fi
 
-# install
-# - git
-# - nvm + node 8
-# - krypt.co
-# - keybase
-# - visual studio code
-# - slack
-# - thefuck 
+# If I ever make this public, add "install krypt.co" to this list!
 
+if [[ "$OSTYPE" = "darwin"* ]]; then
+  echo "This is macOS" 
+  if [ ! -e /usr/local/bin/brew ]; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+  
+  brew_cask_if_missing iterm2 /Applications/iTerm.app
+  brew_cask_if_missing visual-studio-code "/Applications/Visual Studio Code.app"
+  brew_cask_if_missing keybase /Applications/Keybase.app
+  brew_cask_if_missing slack /Applications/Slack.app
+
+  brew_if_missing fish /usr/local/bin/fish
+  brew_if_missing thefuck /usr/local/bin/thefuck
+  brew_if_missing hub /usr/local/bin/hub
+else
+  echo "This is probably linux, do things the linux way..."
+  # install
+  # - git
+  # - nvm + node 8
+  # - keybase
+  # - visual studio code
+  # - slack
+  # - thefuck 
+  # - hub (from github)
+fi
+
+# if not run already, run ./setup-powerline-fonts.sh
