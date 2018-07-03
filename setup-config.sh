@@ -100,6 +100,7 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
   brew_if_missing fish /usr/local/bin/fish
   brew_if_missing thefuck /usr/local/bin/thefuck
   brew_if_missing hub /usr/local/bin/hub
+  brew_if_missing carthage /usr/local/bin/carthage
 else
   echo "This is probably linux, do things the linux way..."
   # install
