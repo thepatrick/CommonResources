@@ -96,6 +96,7 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
   brew_cask_if_missing visual-studio-code "/Applications/Visual Studio Code.app"
   brew_cask_if_missing keybase /Applications/Keybase.app
   brew_cask_if_missing slack /Applications/Slack.app
+  brew_cask_if_missing zerotier-one "/Applications/ZeroTier One.app"
 
   brew_if_missing fish /usr/local/bin/fish
   brew_if_missing thefuck /usr/local/bin/thefuck
