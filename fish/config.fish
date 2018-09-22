@@ -118,10 +118,6 @@ end
 
 set -x HOMEBREW_NO_ANALYTICS 1
 
-if test -e ~/.npmrc
-  set -x OPENTOK_NPM_TOKEN (grep auth ~/.npmrc | sed "s/.*=//g")
-end
-
 if test -e ~/.nvm
   set -x NVM_DIR ~/.nvm
   if test -e ~/.nvm/nvm.sh
