@@ -185,3 +185,11 @@ set -x LSCOLORS GxFxCxDxBxegedabagaced
 
 set -x GPG_TTY (tty)
 set -x EDITOR vim
+
+if test (which gpg-agent)
+  echo GPG Agent present
+  # bass (gpg-agent --daemon --enable-ssh-support --write-env-file "$HOME/.gpg-agent-info")
+  set -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+
+  #  ssh-add -L | grep -iF 'cardno' | pbcopy
+end
