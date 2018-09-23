@@ -125,6 +125,19 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
 
   mkdir -p "$HOME/Library/Application Support/Code/User/"
   setup_link `pwd`/config/visual-studio-code.json "$HOME/Library/Application Support/Code/User/settings.json"
+
+  if ! grep "fish" /etc/shells >> /dev/null; then
+    sudo /bin/sh -c 'echo "/usr/local/bin/fish" >> /etc/shells'
+  fi
+
+  if [[ "$SHELL" != "/usr/local/bin/fish" ]]; then
+    echo "Activating fish..."
+    chsh -s /usr/local/bin/fish
+  fi
+
+  if ! sudo zerotier-cli listnetworks | grep a09acf0233b8a84a >> /dev/null; then
+    sudo zerotier-cli join a09acf0233b8a84a
+  fi
 else
   echo "This is probably linux, do things the linux way..."
   # install
@@ -136,6 +149,7 @@ else
   # - slack
   # - thefuck 
   # - hub (from github)
+  # - fish
 fi
 
 # if not run already, run ./setup-powerline-fonts.sh
