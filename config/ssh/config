@@ -1,107 +1,23 @@
 ControlMaster auto
-ControlPath   /Users/patrick/.ssh/tmp/%h_%p_%r
-
-# Personal - New Stuff Server
-Host cepheus
-  HostName cepheus.us.bigtr.net
-  ForwardAgent yes
-
-# Personal - New UK Stuff Server
-Host perseus
-  HostName perseus.uk.bigtr.net
-  ForwardAgent yes
-
-# Personal - Squash (3GB server)
-Host squash
-  HostName squash.us.bigtr.net
-  ForwardAgent yes
-
-Host fritz
-  HostName fritz.au.bigtr.net
-  ForwardAgent yes
+ControlPath   ~/.ssh/tmp/%h_%p_%r
 
 Host digby
   HostName digby.us.bigtr.net
   ForwardAgent yes
-
-Host home
-  HostName home.au.bigtr.net
-  ForwardAgent yes
-
-Host border
-  HostName border.au.bigtr.net
-  ForwardAgent yes
-
-Host irc-etc
-  HostName irc-etc.digby.us.bigtr.net
-  ForwardAgent yes
+  User patrick
 
 Host bouncer
   HostName bouncer.digby.us.bigtr.net
-  ForwardAgent yes
-
-Host roger
-  HostName roger.au.bigtr.net
-  ForwardAgent yes
-
-Host jamie
-  HostName jamie.au.bigtr.net
   ForwardAgent yes
 
 Host sf
   User jenkins
   HostName pqg.corp.tokbox.com
 
-Host quokka*
-  User quokka
-
-Host quokka-master
-  User quokka
-  HostName quokka-master.corp.tokbox.com
-
-Host devaws
-  User pqg
-  HostName 52.62.32.181
-
-Host mantis002-dev
-  User pqg
-  HostName mantis002-dev.tokbox.com
-
-Host dropbear001-dev
-  User ec2-user
-  HostName 10.0.10.12
-  ProxyCommand ssh mantis002-dev nc -w 120 %h %p
-  IdentityFile ~/.ssh/pqg-dropbear-tests.pem
-  StrictHostKeyChecking yes
-  UserKnownHostsFile ~/.ssh/known_hosts
-  
-Host 10.0.10.*
-  User ec2-user
-  ProxyCommand ssh mantis002-dev nc -w 120 %h %p
-  IdentityFile ~/.ssh/pqg-dropbear-tests.pem
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host 10.0.2.*
-  User ec2-user
-  ProxyCommand ssh mantis002-dev nc -w 120 %h %p
-  IdentityFile ~/.ssh/pqg-dropbear-tests.pem
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host 10.0.3.*
-  User ec2-user
-  ProxyCommand ssh mantis002-dev nc -w 120 %h %p
-  IdentityFile ~/.ssh/pqg-dropbear-tests.pem
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host 10.0.101.*
-  User ec2-user
-  ProxyCommand ssh mantis002-dev nc -w 120 %h %p
-  IdentityFile ~/.ssh/pqg-dropbear-tests.pem
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
+# Host 10.192.11.*
+#   ProxyCommand ssh gateway-host nc -w 120 %h %p
+#   StrictHostKeyChecking no
+#   UserKnownHostsFile /dev/null
 
 Host dropbear002-dev
   User pqg
@@ -110,9 +26,6 @@ Host dropbear002-dev
 
 # By default my username is patrick.
 Host *
-  User patrick
   ServerAliveCountMax 3
   ServerAliveInterval 60
   KeepAlive yes
-  UseKeychain yes
-  AddKeysToAgent yes
