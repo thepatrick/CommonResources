@@ -40,6 +40,9 @@ function brew_cask_if_missing() {
   fi
 }
 
+setup_dir $HOME/.ssh
+setup_dir $HOME/.ssh/tmp
+
 setup_link `pwd`/config/ackrc $HOME/.ackrc
 setup_link `pwd`/config/bash_login $HOME/.bash_login
 setup_link `pwd`/config/bashrc $HOME/.bashrc
