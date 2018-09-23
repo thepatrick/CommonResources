@@ -40,6 +40,9 @@ function brew_cask_if_missing() {
   fi
 }
 
+setup_dir $HOME/.ssh
+setup_dir $HOME/.ssh/tmp
+
 setup_link `pwd`/config/ackrc $HOME/.ackrc
 setup_link `pwd`/config/bash_login $HOME/.bash_login
 setup_link `pwd`/config/bashrc $HOME/.bashrc
@@ -56,8 +59,23 @@ setup_dir $HOME/bin
 setup_link `pwd`/fish $HOME/.config/fish
 setup_link `pwd`/fisherman $HOME/.config/fisherman
 
+setup_dir $HOME/.gnupg
+setup_link `pwd`/config/gnupg_gpg.conf $HOME/.gnupg/gpg.conf
+if [[ "$OSTYPE" = "darwin"* ]]; then
+  setup_link `pwd`/config/gnupg_gpg-agent_darwin.conf $HOME/.gnupg/gpg-agent.conf
+else
+  setup_link `pwd`/config/gnupg_gpg-agent_linux.conf $HOME/.gnupg/gpg-agent.conf
+fi
+
+
 git submodule init
 git submodule update
+
+git config --global user.name "Patrick Quinn-Graham"
+git config --global user.email "make-contact@pftqg.com"
+git config --global user.signingkey "9EF74179"
+git config --global commit.gpgSign true
+git config --global tag.forceSignAnnotated true
 
 download_if_missing https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy $HOME/bin/diff-so-fancy
 
@@ -83,8 +101,6 @@ if [ ! -d $HOME/.tfenv ]; then
   git clone https://github.com/kamatama41/tfenv.git $HOME/.tfenv
 fi
 
-# If I ever make this public, add "install krypt.co" to this list!
-
 if [[ "$OSTYPE" = "darwin"* ]]; then
   echo "This is macOS" 
   if [ ! -e /usr/local/bin/brew ]; then
@@ -98,6 +114,7 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
   brew_cask_if_missing slack /Applications/Slack.app
   brew_cask_if_missing zerotier-one "/Applications/ZeroTier One.app"
   brew_cask_if_missing transmit "/Applications/Transmit.app"
+  brew_cask_if_missing gpg-suite "/Applications/GPG Keychain.app"
 
   brew_if_missing fish /usr/local/bin/fish
   brew_if_missing thefuck /usr/local/bin/thefuck
@@ -111,6 +128,7 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
 else
   echo "This is probably linux, do things the linux way..."
   # install
+  # - gpg & configure it ala https://github.com/dainnilsson/scripts/blob/master/base-install/gpg.sh
   # - git
   # - nvm + node 8
   # - keybase

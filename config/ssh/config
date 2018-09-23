@@ -111,7 +111,6 @@ Host dropbear002-dev
 # By default my username is patrick.
 Host *
   User patrick
-  IdentityFile ~/.ssh/current-default
   ServerAliveCountMax 3
   ServerAliveInterval 60
   KeepAlive yes

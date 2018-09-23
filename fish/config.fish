@@ -118,10 +118,6 @@ end
 
 set -x HOMEBREW_NO_ANALYTICS 1
 
-if test -e ~/.npmrc
-  set -x OPENTOK_NPM_TOKEN (grep auth ~/.npmrc | sed "s/.*=//g")
-end
-
 if test -e ~/.nvm
   set -x NVM_DIR ~/.nvm
   if test -e ~/.nvm/nvm.sh
@@ -189,3 +185,11 @@ set -x LSCOLORS GxFxCxDxBxegedabagaced
 
 set -x GPG_TTY (tty)
 set -x EDITOR vim
+
+if test (which gpg-agent)
+  echo GPG Agent present
+  # bass (gpg-agent --daemon --enable-ssh-support --write-env-file "$HOME/.gpg-agent-info")
+  set -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+
+  #  ssh-add -L | grep -iF 'cardno' | pbcopy
+end
