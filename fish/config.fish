@@ -144,6 +144,12 @@ else
   echo No ~/.nvm, disabling nvm helpers
 end
 
+if test -e ~/.sdkman/bin/sdkman-init.sh
+  function sdk
+    bass source ~/.sdkman/bin/sdkman-init.sh --no-use ';' sdk $argv
+  end
+end
+
 if test (which thefuck)
   if test -e (which thefuck)
     eval (thefuck --alias crap | tr '\n' ';')

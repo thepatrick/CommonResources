@@ -111,4 +111,8 @@ else
   # - hub (from github)
 fi
 
+if [ ! -d ~/.sdkman/ ]; then
+  curl -s "https://get.sdkman.io" | bash
+fi
+
 # if not run already, run ./setup-powerline-fonts.sh
