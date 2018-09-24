@@ -40,6 +40,17 @@ function brew_cask_if_missing() {
   fi
 }
 
+function apt_if_missing() {
+  PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $1|grep "install ok installed")
+  echo Checking for somelib: $PKG_OK
+  if [ "" == "$PKG_OK" ]; then
+    echo "Installing $1"
+    sudo apt-get --yes install $1
+  else
+    echo "$1 installed already"
+  fi
+}
+
 setup_dir $HOME/.ssh
 setup_dir $HOME/.ssh/tmp
 
@@ -140,8 +151,10 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
   fi
 else
   echo "This is probably linux, do things the linux way..."
+  apt_if_missing gnupg2
+  apt_if_missing pcscd
+  apt_if_missing scdaemon
   # install
-  # - gpg & configure it ala https://github.com/dainnilsson/scripts/blob/master/base-install/gpg.sh
   # - git
   # - nvm + node 8
   # - keybase
@@ -150,6 +163,10 @@ else
   # - thefuck 
   # - hub (from github)
   # - fish
+
+  # Restart GPG agent, just in case we just configured it
+  gpg-connect-agent killagent /bye
+  gpg-connect-agent /bye
 fi
 
 if [ ! -d ~/.sdkman/ ]; then
