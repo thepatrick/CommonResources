@@ -195,7 +195,12 @@ set -x EDITOR vim
 if test (which gpg-agent)
   echo GPG Agent present
   # bass (gpg-agent --daemon --enable-ssh-support --write-env-file "$HOME/.gpg-agent-info")
-  set -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
-
+  if test -e ~/.gnupg/S.gpg-agent.ssh
+    set -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+  else if test -e $XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
+    set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
+  else
+    echo Could not find S.gpg-agent.ssh
+  end
   #  ssh-add -L | grep -iF 'cardno' | pbcopy
 end
