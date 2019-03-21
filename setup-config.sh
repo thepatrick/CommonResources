@@ -42,12 +42,22 @@ function brew_cask_if_missing() {
 
 function apt_if_missing() {
   PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $1|grep "install ok installed")
-  echo Checking for somelib: $PKG_OK
+  #echo Checking for $1: $PKG_OK
   if [ "" == "$PKG_OK" ]; then
     echo "Installing $1"
     sudo apt-get --yes install $1
+  #else
+  #  echo "$1 installed already"
+  fi
+}
+
+function add_ppa_if_missing() {
+  SRC_LINE_COUNT=$(grep -c $1 /etc/apt/sources.list.d/*.list | grep -c -v ":0")
+  if [ "0" == "$SRC_LINE_COUNT" ]; then
+    echo "Adding ppa:$1"
+    sudo apt-add-repository ppa:$1
   else
-    echo "$1 installed already"
+    echo "I think ppa:$1 is already set up"
   fi
 }
 
@@ -154,6 +164,11 @@ else
   apt_if_missing gnupg2
   apt_if_missing pcscd
   apt_if_missing scdaemon
+  apt_if_missing vim
+
+  add_ppa_if_missing fish-shell/release-3
+  apt_if_missing fish
+  
   # install
   # - git
   # - nvm + node 8
