@@ -168,7 +168,16 @@ else
 
   add_ppa_if_missing fish-shell/release-3
   apt_if_missing fish
-  
+
+  add_ppa_if_missing ansible/ansible
+  apt_if_missing ansible
+ 
+  # The Fuck
+  apt_if_missing python3-dev
+  apt_if_missing python3-pip
+  apt_if_missing python3-setuptools
+  sudo pip3 install thefuck
+
   # install
   # - git
   # - nvm + node 8
