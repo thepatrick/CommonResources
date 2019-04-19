@@ -161,14 +161,23 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
   fi
 else
   echo "This is probably linux, do things the linux way..."
+
+  # Allow yubikeys to work in web browsers
+  apt_if_missing libu2f-udev
+
+  # Allow yubikeys to do SSH & git commit signing
   apt_if_missing gnupg2
   apt_if_missing pcscd
   apt_if_missing scdaemon
+
+  # Vim. I mean obviously.
   apt_if_missing vim
 
+  # Fish shell
   add_ppa_if_missing fish-shell/release-3
   apt_if_missing fish
 
+  # Ansible
   add_ppa_if_missing ansible/ansible
   apt_if_missing ansible
  
@@ -186,7 +195,6 @@ else
   # - slack
   # - thefuck 
   # - hub (from github)
-  # - fish
 
   # Restart GPG agent, just in case we just configured it
   gpg-connect-agent killagent /bye
