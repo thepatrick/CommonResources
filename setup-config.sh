@@ -246,7 +246,7 @@ if which code; then
   add_vscode_extension_if_missing mads-hartmann.bash-ide-vscode
   add_vscode_extension_if_missing mauve.terraform
   add_vscode_extension_if_missing miclo.sort-typescript-imports
-  add_vscode_extension_if_missing ms-kubernetes-movetools.vscode-kubernetes-tools
+  # add_vscode_extension_if_missing ms-kubernetes-movetools.vscode-kubernetes-tools
   add_vscode_extension_if_missing ms-python.python
   add_vscode_extension_if_missing ms-vscode.cpptools
   add_vscode_extension_if_missing ms-vscode.Go
