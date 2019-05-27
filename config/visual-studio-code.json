@@ -1,5 +1,11 @@
 {
     "editor.tabSize": 2,
     "editor.minimap.enabled": false,
-    "eslint.autoFixOnSave": true
+    "eslint.autoFixOnSave": true,
+    "standard.autoFixOnSave": true,
+    "gitlens.views.repositories.location": "gitlens",
+    "gitlens.views.fileHistory.location": "gitlens",
+    "gitlens.views.lineHistory.location": "gitlens",
+    "gitlens.views.compare.location": "gitlens",
+    "gitlens.views.search.location": "gitlens"
 }
