@@ -120,6 +120,7 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
   brew_if_missing carthage /usr/local/bin/carthage
   brew_if_missing awscli /usr/local/bin/aws
   brew_if_missing jq /usr/local/bin/jq
+  brew_if_missing moreutils /usr/local/bin/ts
 
   ##
    # Setup fish shell on macOS

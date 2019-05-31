@@ -66,8 +66,6 @@ function add_vscode_extension_if_missing() {
   # PKG_COUNT=$()
   if ! code --list-extensions | grep -c $1; then
     echo "Adding extension: $1"
-    code --install-extension $1
-  else
-    echo "I think extension \"$1\" is already installed"
+    chronic code --install-extension $1
   fi
 }
