@@ -62,10 +62,21 @@ function add_ppa_if_missing() {
   fi
 }
 
+function cache_vscode_extensions() {
+  $1 --list-extensions > $1-extensions.txt
+}
+
 function add_vscode_extension_if_missing() {
   # PKG_COUNT=$()
-  if ! code --list-extensions | grep -c $1; then
-    echo "Adding extension: $1"
-    chronic code --install-extension $1
+  if ! chronic grep -c $2 $1-extensions.txt; then
+    echo "Adding extension: $2"
+    chronic $1 --install-extension $2
+  fi
+}
+
+function mas_if_missing() {
+  if [ ! -d "$2" ]; then
+    echo "Installing from App Store: $1 to provide $2"
+    mas install "$1"
   fi
 }

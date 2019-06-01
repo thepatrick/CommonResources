@@ -107,6 +107,10 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
   if [ ! -e /usr/local/bin/brew ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
+
+  brew_if_missing mas /usr/local/bin/mas
+
+  mas_if_missing 497799835 /Applications/Xcode.app
   
   brew_cask_if_missing 1password "/Applications/1Password 7.app"
   brew_cask_if_missing iterm2 /Applications/iTerm.app
@@ -121,6 +125,7 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
   brew_if_missing awscli /usr/local/bin/aws
   brew_if_missing jq /usr/local/bin/jq
   brew_if_missing moreutils /usr/local/bin/ts
+  brew_if_missing yarn /usr/local/bin/yarn
 
   ##
    # Setup fish shell on macOS
@@ -187,6 +192,7 @@ else
   # - visual studio code
   # - slack
   # - hub (from github)
+  # - yarn
 
   # Restart GPG agent, just in case we just configured it
   gpg-connect-agent killagent /bye
@@ -216,55 +222,77 @@ fi
  # Visual Studio Code Extensions
  ##
 if which code; then
-  add_vscode_extension_if_missing bpruitt-goddard.mermaid-markdown-syntax-highlighting
-  add_vscode_extension_if_missing chenxsan.vscode-standardjs
-  add_vscode_extension_if_missing lunaryorn.fish-ide
-  add_vscode_extension_if_missing mohsen1.prettify-json
-  add_vscode_extension_if_missing ms-vscode.cpptools
-  add_vscode_extension_if_missing PeterJausovec.vscode-docker
-  add_vscode_extension_if_missing silvenon.mdx
-  add_vscode_extension_if_missing skyapps.fish-vscode
-  add_vscode_extension_if_missing vstirbu.vscode-mermaid-preview
-
-  add_vscode_extension_if_missing artdiniz.quitcontrol-vscode
-  add_vscode_extension_if_missing christian-kohler.npm-intellisense
-  add_vscode_extension_if_missing christian-kohler.path-intellisense
-  add_vscode_extension_if_missing CoenraadS.bracket-pair-colorizer
-  add_vscode_extension_if_missing cssho.vscode-svgviewer
-  add_vscode_extension_if_missing DavidAnson.vscode-markdownlint
-  add_vscode_extension_if_missing dbaeumer.vscode-eslint
-  add_vscode_extension_if_missing deerawan.vscode-dash
-  add_vscode_extension_if_missing eamodio.gitlens
-  add_vscode_extension_if_missing EditorConfig.EditorConfig
-  add_vscode_extension_if_missing eg2.vscode-npm-script
-  add_vscode_extension_if_missing emmanuelbeziat.vscode-great-icons
-  add_vscode_extension_if_missing esbenp.prettier-vscode
-  add_vscode_extension_if_missing HookyQR.beautify
-  add_vscode_extension_if_missing jock.svg
-  add_vscode_extension_if_missing JulioGold.vscode-smart-split-into-lines
-  add_vscode_extension_if_missing kogai.regex-railroad-diagrams
-  add_vscode_extension_if_missing kumar-harsh.graphql-for-vscode
-  add_vscode_extension_if_missing mads-hartmann.bash-ide-vscode
-  add_vscode_extension_if_missing mauve.terraform
-  add_vscode_extension_if_missing miclo.sort-typescript-imports
-  # add_vscode_extension_if_missing ms-kubernetes-movetools.vscode-kubernetes-tools
-  add_vscode_extension_if_missing ms-python.python
-  add_vscode_extension_if_missing ms-vscode.cpptools
-  add_vscode_extension_if_missing ms-vscode.Go
-  add_vscode_extension_if_missing ms-vscode.vscode-typescript-tslint-plugin
-  add_vscode_extension_if_missing PeterJausovec.vscode-docker
-  add_vscode_extension_if_missing redhat.vscode-yaml
-  add_vscode_extension_if_missing rogalmic.bash-debug
-  add_vscode_extension_if_missing rust-lang.rust
-  add_vscode_extension_if_missing Shan.code-settings-sync
-  add_vscode_extension_if_missing SirTobi.pegjs-language
-  add_vscode_extension_if_missing stringham.move-ts
-  add_vscode_extension_if_missing torn4dom4n.latex-support
-  add_vscode_extension_if_missing twxs.cmake
-  add_vscode_extension_if_missing yzhang.markdown-all-in-one
-  add_vscode_extension_if_missing zxh404.vscode-proto3
+  cache_vscode_extensions code
+  add_vscode_extension_if_missing code chenxsan.vscode-standardjs
+  add_vscode_extension_if_missing code mohsen1.prettify-json
+  add_vscode_extension_if_missing code ms-vscode.cpptools
+  add_vscode_extension_if_missing code PeterJausovec.vscode-docker
+  add_vscode_extension_if_missing code silvenon.mdx
+  add_vscode_extension_if_missing code artdiniz.quitcontrol-vscode
+  add_vscode_extension_if_missing code christian-kohler.npm-intellisense
+  add_vscode_extension_if_missing code christian-kohler.path-intellisense
+  add_vscode_extension_if_missing code CoenraadS.bracket-pair-colorizer
+  add_vscode_extension_if_missing code DavidAnson.vscode-markdownlint
+  add_vscode_extension_if_missing code dbaeumer.vscode-eslint
+  add_vscode_extension_if_missing code eamodio.gitlens
+  add_vscode_extension_if_missing code EditorConfig.EditorConfig
+  add_vscode_extension_if_missing code eg2.vscode-npm-script
+  add_vscode_extension_if_missing code esbenp.prettier-vscode
+  add_vscode_extension_if_missing code HookyQR.beautify
+  add_vscode_extension_if_missing code JulioGold.vscode-smart-split-into-lines
+  add_vscode_extension_if_missing code kumar-harsh.graphql-for-vscode
+  add_vscode_extension_if_missing code mauve.terraform
+  add_vscode_extension_if_missing code miclo.sort-typescript-imports
+  add_vscode_extension_if_missing code ms-python.python
+  add_vscode_extension_if_missing code ms-vscode.cpptools
+  add_vscode_extension_if_missing code ms-vscode.Go
+  add_vscode_extension_if_missing code ms-vscode.vscode-typescript-tslint-plugin
+  add_vscode_extension_if_missing code redhat.vscode-yaml
+  add_vscode_extension_if_missing code rogalmic.bash-debug
+  add_vscode_extension_if_missing code stringham.move-ts
+  add_vscode_extension_if_missing code torn4dom4n.latex-support
+  add_vscode_extension_if_missing code gamunu.vscode-yarn
 else
   echo "Visual Studio Code not installed"
+fi
+
+
+##
+ # Visual Studio Code - Insiders Extensions
+ ##
+if which code-insiders; then
+  cache_vscode_extensions code-insiders
+  add_vscode_extension_if_missing code-insiders chenxsan.vscode-standardjs
+  add_vscode_extension_if_missing code-insiders mohsen1.prettify-json
+  add_vscode_extension_if_missing code-insiders ms-vscode.cpptools
+  add_vscode_extension_if_missing code-insiders PeterJausovec.vscode-docker
+  add_vscode_extension_if_missing code-insiders silvenon.mdx
+  add_vscode_extension_if_missing code-insiders artdiniz.quitcontrol-vscode
+  add_vscode_extension_if_missing code-insiders christian-kohler.npm-intellisense
+  add_vscode_extension_if_missing code-insiders christian-kohler.path-intellisense
+  add_vscode_extension_if_missing code-insiders CoenraadS.bracket-pair-colorizer
+  add_vscode_extension_if_missing code-insiders DavidAnson.vscode-markdownlint
+  add_vscode_extension_if_missing code-insiders dbaeumer.vscode-eslint
+  add_vscode_extension_if_missing code-insiders eamodio.gitlens
+  add_vscode_extension_if_missing code-insiders EditorConfig.EditorConfig
+  add_vscode_extension_if_missing code-insiders eg2.vscode-npm-script
+  add_vscode_extension_if_missing code-insiders esbenp.prettier-vscode
+  add_vscode_extension_if_missing code-insiders HookyQR.beautify
+  add_vscode_extension_if_missing code-insiders JulioGold.vscode-smart-split-into-lines
+  add_vscode_extension_if_missing code-insiders kumar-harsh.graphql-for-vscode
+  add_vscode_extension_if_missing code-insiders mauve.terraform
+  add_vscode_extension_if_missing code-insiders miclo.sort-typescript-imports
+  add_vscode_extension_if_missing code-insiders ms-python.python
+  add_vscode_extension_if_missing code-insiders ms-vscode.cpptools
+  add_vscode_extension_if_missing code-insiders ms-vscode.Go
+  add_vscode_extension_if_missing code-insiders ms-vscode.vscode-typescript-tslint-plugin
+  add_vscode_extension_if_missing code-insiders redhat.vscode-yaml
+  add_vscode_extension_if_missing code-insiders rogalmic.bash-debug
+  add_vscode_extension_if_missing code-insiders stringham.move-ts
+  add_vscode_extension_if_missing code-insiders torn4dom4n.latex-support
+  add_vscode_extension_if_missing code-insiders gamunu.vscode-yarn
+else
+  echo "Visual Studio Code - Insiders not installed"
 fi
 
 # if not run already, run ./setup-powerline-fonts.sh
