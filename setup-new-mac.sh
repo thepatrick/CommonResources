@@ -23,3 +23,10 @@ pushd $HOME/Developer/CommonResources
 
 # git remote rm origin
 # git remote add origin git@github.com:thepatrick/CommonResources.git
+
+# Copy keybase challenges:
+# cp /keybase/private/thepatrick/yubico/challenge-* ~/.yubico/
+# Add to /etc/pam.d/screensaver after "account required pam_opendirectory.so"
+#   auth       required       /usr/local/lib/security/pam_yubico.so mode=challenge-response
+# Add to /etc/pam.d/authorization after "account required pam_opendirectory.so"
+#   auth       required       /usr/local/lib/security/pam_yubico.so mode=challenge-response

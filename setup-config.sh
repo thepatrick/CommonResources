@@ -127,6 +127,8 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
   brew_if_missing moreutils /usr/local/bin/ts
   brew_if_missing yarn /usr/local/bin/yarn
 
+  brew_if_missing pam_yubico /usr/local/lib/security/pam_yubico.so
+
   ##
    # Setup fish shell on macOS
    ##
