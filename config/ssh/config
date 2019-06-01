@@ -9,20 +9,16 @@ Host digby
 Host bouncer
   HostName bouncer.digby.us.bigtr.net
   ForwardAgent yes
-
-Host sf
-  User jenkins
-  HostName pqg.corp.tokbox.com
-
+  
 # Host 10.192.11.*
 #   ProxyCommand ssh gateway-host nc -w 120 %h %p
 #   StrictHostKeyChecking no
 #   UserKnownHostsFile /dev/null
 
-Host dropbear002-dev
-  User pqg
-  HostName 52.32.238.94
-  ForwardAgent yes
+
+Host ansible1-syd
+  HostName ansible1-syd.thepatrick.cloud
+  User patrick
 
 # By default my username is patrick.
 Host *
