@@ -36,3 +36,9 @@ pushd $HOME/Developer/CommonResources
 # sudo brew services start dnscrypt-proxy
 # bitbar://openPlugin?title=dnscrypt-proxy%20switcher&src=https://github.com/matryer/bitbar-plugins/raw/master/Network%2fdnscrypt-proxy-switcher.10s.sh
 # bitbar://openPlugin?title=Brew%20Services&src=https://github.com/matryer/bitbar-plugins/raw/master/Dev%2fHomebrew%2fbrew-services.10m.rb
+
+# echo $TERM_PROGRAM
+# iTerm.app
+
+# Require sudo password on every request:
+# Defaults        env_reset,timestamp_timeout=0
