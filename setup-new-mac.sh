@@ -22,6 +22,7 @@ pushd $HOME/Developer/CommonResources
 
 # Pair required smart cards
 # install RequireSmartcard.mobileconfig
+# and then require smart cards for all the pam things: https://support.apple.com/en-us/HT208372#configsample
 
 # sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 # sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setloggingmode on
