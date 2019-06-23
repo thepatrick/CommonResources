@@ -7,9 +7,9 @@
 <array>
 <dict>
 <key>PayloadDescription</key>
-<string>Configures smart card-only</string>
+<string>Configures Require Smart Card</string>
 <key>PayloadDisplayName</key>
-<string>Smart card-only</string>
+<string>Require Smart Card</string>
 <key>PayloadIdentifier</key>
 <string>com.apple.configprofile.78.</string>
 <key>PayloadOrganization</key>
@@ -31,9 +31,9 @@
 </dict>
 </array>
 <key>PayloadDescription</key>
-<string>Smartcard profile.</string>
+<string>Requires a smart card to login and unlock this computer.</string>
 <key>PayloadDisplayName</key>
-<string>Smart card-only</string>
+<string>Require Smart Card</string>
 <key>PayloadIdentifier</key>
 <string>com.apple.configprofile.77</string>
 <key>PayloadOrganization</key>
