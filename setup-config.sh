@@ -126,6 +126,7 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
   brew_if_missing jq /usr/local/bin/jq
   brew_if_missing moreutils /usr/local/bin/ts
   brew_if_missing yarn /usr/local/bin/yarn
+  brew_if_missing terminal-notifier /usr/local/bin/terminal-notifier
 
   brew_if_missing pam_yubico /usr/local/lib/security/pam_yubico.so
 
@@ -136,6 +137,10 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
   if ! grep "fish" /etc/shells >> /dev/null; then
     sudo /bin/sh -c 'echo "/usr/local/bin/fish" >> /etc/shells'
   fi
+
+  # TODO: IF ~/.gnupg/S.gpg-agent.ssh does not exist, run `gpg-agent --daemon --enable-ssh-support --write-env-file "$HOME/.gpg-agent-info"`
+  # TODO: https://github.com/shtirlic/yubikeylockd
+  
   if [[ "$SHELL" != "/usr/local/bin/fish" ]]; then
     echo "Activating fish..."
     chsh -s /usr/local/bin/fish
