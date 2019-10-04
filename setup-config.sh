@@ -164,6 +164,8 @@ else
 
   # Allow yubikeys to work in web browsers
   apt_if_missing libu2f-udev
+  apt_if_missing libpam-yubico
+  apt_if_missing yubikey-personalization
 
   # Allow yubikeys to do SSH & git commit signing
   apt_if_missing gnupg2
