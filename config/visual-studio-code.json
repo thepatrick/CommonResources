@@ -1,5 +1,23 @@
 {
     "editor.tabSize": 2,
     "editor.minimap.enabled": false,
-    "eslint.autoFixOnSave": true
+    "eslint.autoFixOnSave": true,
+    "window.zoomLevel": 0,
+    "editor.fontSize": 14,
+    "editor.formatOnSave": true,
+    "prettier.requireConfig": true,
+    "standard.autoFixOnSave": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "workbench.colorTheme": "GitHub Plus",
+    "window.titleBarStyle": "native",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "standard.usePackageJson": true,
+    "standard.semistandard": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
