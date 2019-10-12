@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://support.apple.com/en-us/HT208372#configsample -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+<key>PayloadContent</key>
+<array>
+<dict>
+<key>PayloadDescription</key>
+<string>Configures Require Smart Card</string>
+<key>PayloadDisplayName</key>
+<string>Require Smart Card</string>
+<key>PayloadIdentifier</key>
+<string>com.apple.configprofile.78.</string>
+<key>PayloadOrganization</key>
+<string>Apple</string>
+<key>PayloadType</key>
+<string>com.apple.security.smartcard</string>
+<key>PayloadUUID</key>
+<string>5A15247B-899C-474D-B1D7-DBD82BDE5678</string>
+<key>PayloadVersion</key>
+<integer>1</integer>
+<key>UserPairing</key>
+<false/>
+<key>allowSmartCard</key>
+<true/>
+<key>checkCertificateTrust</key>
+<false/>
+<key>enforceSmartCard</key>
+<true/>
+</dict>
+</array>
+<key>PayloadDescription</key>
+<string>Requires a smart card to login and unlock this computer.</string>
+<key>PayloadDisplayName</key>
+<string>Require Smart Card</string>
+<key>PayloadIdentifier</key>
+<string>com.apple.configprofile.77</string>
+<key>PayloadOrganization</key>
+<string></string>
+<key>PayloadRemovalDisallowed</key>
+<false/>
+<key>PayloadType</key>
+<string>Configuration</string>
+<key>PayloadScope</key>
+<string>system</string>
+<key>PayloadUUID</key>
+<string>7D34CC86-C707-44D2-9A9F-C5F6E347BD77</string>
+<key>PayloadVersion</key>
+<integer>1</integer>
+</dict>
+</plist>

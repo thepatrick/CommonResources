@@ -1,12 +1,12 @@
 [submodule "vim/bundle/command-t"]
 	path = vim/bundle/command-t
-	url = git://github.com/wincent/command-t.git
+	url = https://github.com/wincent/command-t.git
 [submodule "vim/bundle/vim-airline"]
 	path = vim/bundle/vim-airline
-	url = git://github.com/bling/vim-airline.git
+	url = https://github.com/bling/vim-airline.git
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
-	url = git://github.com/scrooloose/syntastic.git
+	url = https://github.com/scrooloose/syntastic.git
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
@@ -18,4 +18,4 @@
 	url = https://github.com/edc/bass
 [submodule "vim/bundle/vim-unimpaired"]
 	path = vim/bundle/vim-unimpaired
-	url = git@github.com:tpope/vim-unimpaired.git
+	url = https://github.com/tpope/vim-unimpaired.git
